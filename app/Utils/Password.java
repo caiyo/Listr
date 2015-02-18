@@ -1,0 +1,45 @@
+package Utils;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Random;
+
+public class Password {
+	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+	private static final Random random = new SecureRandom();
+	
+	public static String bytesToHex(byte[] bytes) {
+	    char[] hexChars = new char[bytes.length * 2];
+	    for ( int j = 0; j < bytes.length; j++ ) {
+	        int v = bytes[j] & 0xFF;
+	        hexChars[j * 2] = hexArray[v >>> 4];
+	        hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+	    }
+	    return new String(hexChars);
+	}
+	
+	public static String hashPasword(String password, String salt){
+		String returnPassword=null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update((password+salt).getBytes("UTF-8"));
+			returnPassword = bytesToHex(md.digest());
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnPassword;
+	}
+	
+	public static String getSalt(){
+		byte salt [] = new byte[32];
+		random.nextBytes(salt);
+		return bytesToHex(salt);
+	}
+}

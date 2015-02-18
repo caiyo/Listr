@@ -1,0 +1,26 @@
+--logs in as given username/password
+curl --data "userName=poop&password=poop" -c "cookies.txt" http://localhost:9000/login
+
+--create group, given name, of logged in person 
+curl -b "cookies.txt" --data "name=newgroup" http://localhost:9000/api/groups
+
+--get all groups of logged in member
+curl -b "cookies.txt" http://localhost:9000/api/groups
+
+--add user to group
+curl -b "cookies.txt" --data "username=kyle&isAdmin=true" http://localhost:9000/api/groups/1?action=addUser
+
+--remove user from group
+curl -b "cookies.txt" --data "username=kyle" http://localhost:9000/api/groups/1?action=removeUser
+
+--promote user to admin
+curl -b "cookies.txt" --data "username=kyle" http://localhost:9000/api/groups/1?action=promoteUser
+
+--create list
+curl -b "cookies.txt" --data "name=list1" http://localhost:9000/api/groups/1/lists
+
+--delete list
+curl -b "cookies.txt" -X DELETE http://localhost:9000/api/lists/2
+
+--add item
+curl -b "cookies.txt" --data "name=item1" http://localhost:9000/api/lists/3 

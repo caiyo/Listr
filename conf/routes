@@ -1,0 +1,30 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                           controllers.Application.index()
+
+GET     /signup                                     controllers.Application.signUp()
+POST    /signup                                     controllers.AccountController.createAccount()
+
+GET	    /login                                      controllers.Application.login()
+POST    /login                                      controllers.Application.authenticate()
+
+#########API##############
+
+#Group api
+GET     /api/groups                                 controllers.GroupController.getGroups()
+POST    /api/groups                                 controllers.GroupController.createGroup()
+POST    /api/groups/:id                             controllers.GroupController.actionRouter(id:String)
+
+#List api
+GET     /api/groups/:id/lists                       controllers.ListController.getListsinGroup(id:String)
+GET     /api/lists                                  controllers.ListController.getAllLists()
+POST    /api/groups/:id/lists                       controllers.ListController.createList(id:String)
+POST    /api/lists/:id                              controllers.ListController.addItem(id:String)
+DELETE  /api/lists/:listid                          controllers.ListController.deleteList(listid:String)
+PUT     /api/lists/:listid/item/:itemid/checkoff    controllers.ListController.checkOffItem(listid:String, itemid:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
