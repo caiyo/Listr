@@ -24,18 +24,24 @@ public class ListController extends Controller {
     public static Result createList(String groupId){
         User currentUser = User.findByUserName(request().username());
         Group group = Group.findById(Long.parseLong(groupId));
+        String req = "req_"; //flag used to check if form data is a 'required' checkbox
         if(currentUser.isMember(group)){
             Set<ListProperty> listProperties = new HashSet<>();
             Map<String,String> formData = Form.form().bindFromRequest().data();
             ItemList list = new ItemList(formData.get("name"));
             for(Map.Entry<String, String> data : formData.entrySet()){
-                   if(!data.getKey().equals("name")){
-                       listProperties.add(new ListProperty(data.getValue()));
+                    //doesnt get the name form data and checks that
+                    //data is not a checkbox (prefixed by 'req_')
+                   if(!data.getKey().equals("name") 
+                      && data.getValue()!=null && !data.getValue().isEmpty()
+                      && !data.getKey().contains(req)){
+                       listProperties.add(new ListProperty(data.getValue(),                                                                   
+                                           formData.containsKey(req+data.getKey())));
                    }
             }
             return ok(toJson(ItemList.createList(currentUser, group, list, listProperties)));
         }
-        return badRequest("must be part of group to add list");
+        return unauthorized("must be part of group to add list");
     }
     
     @Transactional
@@ -48,12 +54,21 @@ public class ListController extends Controller {
             Map<String,String> formData = Form.form().bindFromRequest().data();
             Item item = new Item(formData.get("name"));
             for(ListProperty lp : listProps){
-                ItemPropertyValue  ipv= new ItemPropertyValue(formData.get(lp.getPropertyName()));
-                itemPropVals.add(ItemPropertyValue.createItemPropertyValue(ipv, item, lp));
+                String propVal = formData.get(lp.getPropertyName());
+                if((lp.isRequired() && !(propVal==null || propVal.isEmpty()))
+                    || !lp.isRequired()){
+                    ItemPropertyValue  ipv= new ItemPropertyValue(propVal,
+                                                                    item, lp);
+                    itemPropVals.add(ipv);
+                }
+                else{
+                    badRequest("1 or more of the fields cannot be null");
+                }
+
             }
             return ok(toJson(Item.createItem(item, currentUser, list, itemPropVals)));
         }
-        return badRequest("User is not part of group"); 
+        return unauthorized("User is not part of group"); 
     }
     
     //TODO complete update list item
@@ -87,7 +102,7 @@ public class ListController extends Controller {
             ItemList.deleteList(list);
             return ok();
         }
-        return badRequest("must be creater to delete");
+        return unauthorized("must be creater to delete");
     }
     
     @Transactional
@@ -97,7 +112,7 @@ public class ListController extends Controller {
         if(currentUser.isMember(group)){
             return ok(toJson(group.getLists()));
         }
-        return badRequest("Not part of group");
+        return unauthorized("Not part of group");
     }
     
     @Transactional

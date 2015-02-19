@@ -29,8 +29,10 @@ public class ItemPropertyValue {
     private String value;
     
     public ItemPropertyValue (){}
-    public ItemPropertyValue(String value){
+    public ItemPropertyValue(String value, Item item, ListProperty listProperty){
         this.value=value;
+        this.item=item;
+        this.listProperty=listProperty;
     }
     
     /*
@@ -63,9 +65,7 @@ public class ItemPropertyValue {
     /*
      * END GETTERS AND SETTERS
      */
-    public static ItemPropertyValue createItemPropertyValue(ItemPropertyValue ipv, Item item, ListProperty lp ){
-        ipv.setItem(item);
-        ipv.setListProperty(lp);
+    public static ItemPropertyValue createItemPropertyValue(ItemPropertyValue ipv){
         JPA.em().persist(ipv);
         return ipv;
     }

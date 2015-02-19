@@ -98,6 +98,9 @@ public class Item {
 	    item.setList(list);
 	    item.setDone(false);
 	    item.setProperties(ipv);
+	    for(ItemPropertyValue i : ipv){
+	        ItemPropertyValue.createItemPropertyValue(i);
+	    }
 	    JPA.em().persist(item);
 	    return item;
 	}

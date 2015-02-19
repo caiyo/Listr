@@ -17,10 +17,16 @@ curl -b "cookies.txt" --data "username=kyle" http://localhost:9000/api/groups/1?
 curl -b "cookies.txt" --data "username=kyle" http://localhost:9000/api/groups/1?action=promoteUser
 
 --create list
-curl -b "cookies.txt" --data "name=list1" http://localhost:9000/api/groups/1/lists
+curl -b "cookies.txt" --data "name=list1&p1=price&p2=duedate&p3=amount" http://localhost:9000/api/groups/1/lists
 
 --delete list
 curl -b "cookies.txt" -X DELETE http://localhost:9000/api/lists/2
 
 --add item
-curl -b "cookies.txt" --data "name=item1" http://localhost:9000/api/lists/3 
+curl -b "cookies.txt" --data "name=item1&price=2&duedate=2014&amount=15" http://localhost:9000/api/lists/1
+
+--delete item
+curl -b "cookies.txt" -X DELETE http://localhost:9000/api/lists/3/item/1
+
+--checkoff item
+curl -b "cookies.txt" -X PUT http://localhost:9000/api/lists/4/item/2/checkoff

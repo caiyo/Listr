@@ -26,9 +26,12 @@ public class ListProperty {
     
     private String propertyName;
     
+    private boolean isRequired;
+    
     public ListProperty(){}
-    public ListProperty(String propertyName){
+    public ListProperty(String propertyName, boolean isRequired){
         this.propertyName=propertyName;
+        this.isRequired=isRequired;
     }
     
     /*
@@ -53,7 +56,12 @@ public class ListProperty {
     public void setPropertyName(String propertyName) {
         this.propertyName = propertyName;
     }
-    
+    public boolean isRequired() {
+        return isRequired;
+    }
+    public void setRequired(boolean isRequired) {
+        this.isRequired = isRequired;
+    }
     /*
      * END GETTERS AND SETTERS
      */
