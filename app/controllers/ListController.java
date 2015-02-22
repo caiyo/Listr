@@ -2,6 +2,7 @@ package controllers;
 
 import static play.libs.Json.toJson;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -55,6 +56,7 @@ public class ListController extends Controller {
             Item item = new Item(formData.get("name"));
             for(ListProperty lp : listProps){
                 String propVal = formData.get(lp.getPropertyName());
+                //if field is required, it cant be empty/null
                 if((lp.isRequired() && !(propVal==null || propVal.isEmpty()))
                     || !lp.isRequired()){
                     ItemPropertyValue  ipv= new ItemPropertyValue(propVal,

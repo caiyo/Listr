@@ -1,0 +1,50 @@
+.wrapper{
+    padding-left: 250px;
+}
+.group-list{
+    position: absolute;
+    overflow-y:auto;
+    height: 100%;
+    width: 250px;
+    word-wrap: break-word;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;  
+}
+.sidebar-wrapper{
+    margin-left: -250px;
+    width: 250px;
+    background: #222;
+    position: fixed;
+    height: 100%;
+    z-index: 100;
+    bottom: 0;
+    color: white;
+}
+.sidebar-nav{
+    position: fixed;
+    top: 51px;
+    margin: 0;
+    padding: 0;
+    bottom: 90px;
+}
+
+.sidebar-buttons{
+    position: absolute;
+    bottom: 0;
+    width: 250px;
+    padding-right:5px;
+}
+.sidebar-buttons >div{
+    left: 70px;
+}
+.sidebar-nav li a {
+    color: #999;
+}
+.sidebar-nav .group:hover{
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+.sidebar-nav h3 {
+    margin-left: 15px;
+    color: #fff;
+}

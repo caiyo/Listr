@@ -1,8 +1,6 @@
 package controllers;
 
 import static play.libs.Json.toJson;
-
-
 import models.Group;
 import models.User;
 import play.data.DynamicForm;
@@ -78,6 +76,8 @@ public class GroupController extends Controller {
     
     @Transactional
     public static Result getGroups(){
+        System.out.println(request().cookie("PLAY_SESSION").value());
+        
         User currentUser = User.findByUserName(request().username());
         return ok(toJson(currentUser.getGroups()));
     }

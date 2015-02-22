@@ -1,10 +1,17 @@
 package controllers;
 
+import static play.libs.Json.toJson;
+
+import java.util.Arrays;
+import java.util.Map;
+
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.*;
+import play.mvc.Http.Response;
 import views.html.*;
 import models.Account;
+import models.User;
 
 public class Application extends Controller {
 	public static class Login{
@@ -34,7 +41,7 @@ public class Application extends Controller {
     }
 
 	public static Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(index2.render());
     }
     
 	public static Result login(){
@@ -48,7 +55,7 @@ public class Application extends Controller {
     }
     
     public static Result signUp(){
-		return ok(signup.render(Form.form(Account.class)));
+		return ok();
 	}
     
     //TODO figure out how to handle request
@@ -63,10 +70,16 @@ public class Application extends Controller {
     	    System.out.println("username + pass  found");
     		session().clear();
     		session("userName", f.get().userName.toLowerCase());
-    		
-    		return ok();
+    		return ok(toJson(User.findByUserName(session("userName"))));
     	}
     }
-    
+    public static Result preflight(String all) {
+        response().setHeader("Access-Control-Allow-Origin", "*");
+        response().setHeader("Allow", "*");
+        response().setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+        response().setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Referer, User-Agent");
+        response().setHeader("Access-Control-Allow-Credentials", "true");
+        return ok();
+    }
 
 }
