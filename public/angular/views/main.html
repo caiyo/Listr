@@ -1,3 +1,95 @@
-<div>
-	<h1>Main<h1>
+<div ng-show="selected">
+    <h1>{{selected.name}}</h1>
+    <div id="group-tables" class="row">
+        <div class="col-sm-3">
+            <h3 class="text-center">Lists</h3>
+	        <table class='table'>
+	            <thead>
+	                <tr>
+	                    <th>Name</th>
+	                    <th>Total Items</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr ng-repeat="list in selected.lists | orderBy:'name'">
+	                    <td>{{list.name}}</td>
+	                    <td>{{list.items.length}}</td>
+	                </tr>
+	            </tbody>
+	            <tfoot>
+                    <tr>
+                        <td>
+                            <div class='btn-group btn-group-xs'>
+                                <a id='addGroup'  title="create group" class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-plus'  aria-hidden="true"></span></a>
+                                <a id='deleteGroup'  title="delete group" class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
+                            </div>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tfoot>
+	        </table>
+        </div>
+        
+        <div class="col-sm-3 col-sm-offset-1">
+            <h3 class="text-center">Members</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="member in selected.members | orderBy:'name'">
+                        <td>{{member.name}}</td>
+                        <td>{{member.userName}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <div class='btn-group btn-group-xs' ng-controller=ModalCtrl>
+                                <a id='addGroup' title="create group" class='btn btn-primary btn-xs' ng-click="open()"><span class='glyphicon glyphicon-plus'  aria-hidden="true"></span></a>
+                                <a id='deleteGroup' title="delete group" class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+                 
+        </div>
+        
+        <div class="col-sm-3 col-sm-offset-1">
+            <h3 class="text-center">Admins</h3>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="admin in selected.admins | orderBy:'name'">
+                        <td>{{admin.name}}</td>
+                        <td>{{admin.userName}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+		                    <div class='btn-group btn-group-xs'>
+		                        <a id='addGroup'  title="create group" class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-plus'  aria-hidden="true"></span></a>
+		                        <a id='deleteGroup' title="delete group" class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+    </div>
 </div>

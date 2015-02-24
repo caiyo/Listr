@@ -14,6 +14,10 @@
 			
 		};
 		
+		service.addUserToGroup = function(){
+			
+		};
+		
 		return service;
 	};
 	var module = angular.module("listr");
