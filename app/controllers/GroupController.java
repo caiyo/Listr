@@ -23,6 +23,8 @@ public class GroupController extends Controller {
                 return promoteUserToAdmin(groupId);
             case "removeUser" :
                 return removeUserFromGroup(groupId);
+            case "demoteUser" :
+                return demoteUserFromAdmin(groupId);
             default:
                 return badRequest();
         }
@@ -43,10 +45,15 @@ public class GroupController extends Controller {
         DynamicForm f = Form.form().bindFromRequest();
         User userToAdd = User.findByUserName(f.get("username"));
         boolean admin = Boolean.parseBoolean(f.get("isAdmin"));
+        if( userToAdd == null){
+            return badRequest("Error adding " + f.get("username") + " to " + group.getName());
+        }
         if(currentUser.addUserToGroup(userToAdd, group, admin))
           //TODO change what is returned in http response
-         return ok();
-        return badRequest("Error adding " + userToAdd.getUserName() + "to " + group.getName());
+         return ok(toJson(userToAdd));
+        else{
+            return badRequest("Cannot add user to " + group.getName());
+        }
     }
     
     @Transactional
@@ -57,8 +64,19 @@ public class GroupController extends Controller {
         Group group = Group.findById(Long.parseLong(groupId));
         if(currentUser.promoteToGroupAdmin(userToPromote, group))
         //TODO change what is returned in http response
-           return ok();
+           return ok(toJson(userToPromote));
         return badRequest("Error promoting " + userToPromote.getUserName() + "to admin");
+    }
+    
+    @Transactional
+    private static Result demoteUserFromAdmin(String groupId){
+        User currentUser = User.findByUserName(request().username());
+        DynamicForm f = Form.form().bindFromRequest();
+        User userToDemote = User.findByUserName(f.get("username"));
+        Group group = Group.findById(Long.parseLong(groupId));
+        if(currentUser.demoteFromGroupAdmin(userToDemote, group))
+            return ok(toJson(userToDemote));
+        return badRequest("Error demoting " + userToDemote.getUserName() + " from admin");
     }
     
     @Transactional
@@ -75,9 +93,7 @@ public class GroupController extends Controller {
     }
     
     @Transactional
-    public static Result getGroups(){
-        System.out.println(request().cookie("PLAY_SESSION").value());
-        
+    public static Result getGroups(){        
         User currentUser = User.findByUserName(request().username());
         return ok(toJson(currentUser.getGroups()));
     }

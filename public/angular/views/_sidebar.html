@@ -12,11 +12,11 @@
                   
                         <li>
                             <div class="nav-link" ng-class="groupSelected(group)">
-	                            <a ng-click="display(group)">[ {{group.display ? '-' : '+'}} ] </a>
+	                            <a ng-click="displayLists(group)">[ {{group.display ? '-' : '+'}} ] </a>
 	                            <a class="group-anchor" ng-click="select(group)">{{group.name}}</a>
                             </div>
                             <ul ng-show="group.display">
-                                <li ng-repeat="list in group.lists | orderBy:'name'">
+                                <li ng-repeat="list in group.lists | orderBy:'name'" ng-click="clickList(list,group)">
                                     <a>{{list.name}}</a>
                                 </li>
                             </ul>

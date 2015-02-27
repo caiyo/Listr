@@ -1,0 +1,28 @@
+<div>
+        <div class="modal-header">
+            <h3 class="modal-title">Create List</h3>
+        </div>
+        
+        <div class="modal-body">
+            {{error}}
+            <div class='form-group'>
+                <input id ='name' class='form-control' type="text" name="name" placeholder="Enter List Name" ng-model="listForm.name">
+            </div>
+            <form class='form-group' ng-repeat="property in listForm.properties"> 
+	            <div class="form-inline">
+	                <input id ='name' class='form-control' type="text" name="name" placeholder="Enter Property for List" ng-model="property.propName">
+	                <input id='reqCheckbox' name='required' type='checkbox' value='true' ng-model="property.req"> Required?                 
+	                    
+	            </div>
+            </form>
+            <div>
+                <button class="btn btn-primary" ng-click="addListProperty()">add property</button>
+            </div>
+            
+        </div>
+        
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+</div>

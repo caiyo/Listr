@@ -10,8 +10,13 @@
 				templateUrl: "/assets/angular/views/main.html",
 				controller: "MainCtrl"
 			})
-			.when("/group",{
-				templateUrl: "/assets/angular/views/groupView.html"
+			.when("/group/:groupId",{
+				templateUrl: "/assets/angular/views/groupView.html",
+				controller: "GroupCtrl"
+			})
+			.when("/group/:groupId/list/:listId",{
+				templateUrl: "/assets/angular/views/listView.html",
+				controller: "ListCtrl"
 			});
 
 	});

@@ -1,0 +1,95 @@
+<div ng-show="group">
+    <h1>{{group.name}}</h1>
+    <div id="group-tables" class="row">
+        <div class="col-sm-3">
+            <h3 class="text-center">Lists</h3>
+            <table class='table' ng-controller="ListTableCtrl">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Total Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="list in group.lists | orderBy:'name'"  ng-class="listSelected(list)" ng-click="selectRow(list)" ng-dblclick="routeToList(list,group)">
+                        <td>{{list.name}}</td>
+                        <td>{{list.items.length}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <div class='btn-group btn-group-xs'>
+                                <a id='createList'  title="create list" class='btn btn-primary btn-xs' ng-controller="ModalCtrl" ng-click="open('createList', group)"><span class='glyphicon glyphicon-plus'  aria-hidden="true"></span></a>
+                                <a id='deleteList'  title="delete list" class='btn btn-primary btn-xs' ng-click="deleteList(selectedList, group)"><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
+                            </div>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+        <div class="col-sm-3 col-sm-offset-1">
+            <h3 class="text-center">Members</h3>
+            <table class='table' ng-controller="MemberTableCtrl">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="member in group.members | orderBy:'name'" ng-class="memberSelected(member)" ng-click="selectRow(member)">
+                        <td>{{member.name}}</td>
+                        <td>{{member.userName}}</td>
+                    </tr>
+                </tbody>
+                <tfoot ng-show="isAdmin">
+                    <tr>
+                        <td>
+                            <div class='btn-group btn-group-xs'  >
+                                <a id='addMember' title="add member" class='btn btn-primary btn-xs' ng-click="open('addUser', group)" ng-controller="ModalCtrl"><span class='glyphicon glyphicon-plus'  aria-hidden="true"></span></a>
+                                <a id='promoteMember' title="Promote to admin" class='btn btn-primary btn-xs' ng-click="promoteToAdmin(selectedMember, group)"><span class='glyphicon glyphicon-chevron-up'  aria-hidden="true"></span></a>
+                                <a id='removeMember' title="remove selected member" class='btn btn-primary btn-xs' ng-click="removeFromGroup(selectedMember, group)"><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+                 
+        </div>
+        
+        <div class="col-sm-3 col-sm-offset-1">
+            <h3 class="text-center">Admins</h3>
+            <table class='table' ng-controller="AdminTableCtrl">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="admin in group.admins | orderBy:'name'" ng-class="adminSelected(admin)" ng-click="selectRow(admin)">
+                        <td>{{admin.name}}</td>
+                        <td>{{admin.userName}}</td>
+                    </tr>
+                </tbody>
+                <tfoot ng-show="isAdmin">
+                    <tr>
+                        <td>
+                            <div class='btn-group btn-group-xs'>
+                                <a id='removeAdmin' title="remove admin" class='btn btn-primary btn-xs' ng-click="removeAdmin(selectedAdmin, group)"><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+    </div>
+</div>

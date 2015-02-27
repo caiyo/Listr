@@ -1,31 +1,29 @@
 (function(){
 	var module = angular.module("listr");
 
-	var GroupCtrl = function($scope, ListrService, $location){
-		ListrService.getGroups(function(data, status){
-			if(status == 200){
-				console.log(data);
-				$scope.groups=data;
+	var GroupCtrl = function($scope, $rootScope, GroupProvider, $location, $routeParams){
+		var selected = GroupProvider.getSelected();
+		var groupId = $routeParams.groupId;
+		
+		
+		//Checks to see if logged in user is an admin of the group
+		//used to determine whether user can add users to group or not
+		var isAdmin = function(){
+			var user = $rootScope.user;
+			var groupAdmins = GroupProvider.getSelected().admins;
+			for(i in groupAdmins){
+				if(groupAdmins[i].userName == user.userName)
+					return true;
 			}
-		});
-		
-		$scope.groupSelected=function(group){
-			return group ===$scope.selected? 'selected' : null;
+			return false;
 		}
 		
-		$scope.display=function(group){
-			group.display = !group.display;
 
-		}
+		$scope.group = selected.id == groupId ? selected : GroupProvider.setSelected(GroupProvider.getGroup(groupId));
+		console.log("selected: ");
+		console.log($scope.group);
+		$scope.isAdmin = isAdmin();
 		
-		$scope.select=function(group){
-			$scope.selected=group;
-			group.display = true;
-		}
-		
-		$scope.addUserToGroup=function(group){
-			console.log("adding member");
-		}
 	};
 	module.controller("GroupCtrl", GroupCtrl);
 }());

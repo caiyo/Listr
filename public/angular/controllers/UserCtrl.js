@@ -4,7 +4,7 @@
 	var UserCtrl = function($scope, $rootScope){
 		$rootScope.user={
 				name:'Kyle',
-				username: 'caiyo'
+				userName: 'caiyo'
 		};
 	};	
 	module.controller("UserCtrl", UserCtrl);

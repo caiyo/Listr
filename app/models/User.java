@@ -30,7 +30,7 @@ public class User {
 
 	public User(){}
 	public User(String userName, String name){
-	    this.userName=userName;
+	    this.userName=userName.toLowerCase();
 	    this.name=name;
 	}
 	//GETTERS SETTERS
@@ -69,11 +69,19 @@ public class User {
 	        left=true;
 	        
 	    }
-	    if(adminedGroups.contains(groupToLeave)){
-	        adminedGroups.remove(groupToLeave);
-	        groupToLeave.removeAdmin(this);
-	    }
+	    //checks if is admin and removes if so
+	    demoteFromAdmin(groupToLeave);
 	    return left;
+	}
+	
+	public boolean demoteFromAdmin(Group demotedGroup){
+	    boolean demoted = false;
+	    if(adminedGroups.contains(demotedGroup)){
+            adminedGroups.remove(demotedGroup);
+            demotedGroup.removeAdmin(this);
+            demoted=true;
+        }
+	    return demoted;
 	}
 	
 	//checks that user is admin of given group
@@ -98,11 +106,18 @@ public class User {
 	public boolean promoteToGroupAdmin(User userToPromote, Group group){
 	    boolean promoted = false;
 	    if(isAdmin(group)){
-	        group.addAdmin(userToPromote);
+	        promoted = group.addAdmin(userToPromote);
 	        System.out.println(userToPromote.getName() + " has been made admin");
-	        promoted = true;
 	    }
 	    return promoted;
+	}
+	
+	public boolean demoteFromGroupAdmin(User userToDemote, Group group){
+	    boolean demoted = false;
+	    if(isAdmin(group)){
+	        demoted = userToDemote.demoteFromAdmin(group);
+	    }
+	    return demoted;
 	}
 	public boolean removeUserFromGroup (User userToRemove, Group group){
 	    boolean removed = false;

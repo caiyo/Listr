@@ -73,8 +73,8 @@ public class Group {
 		return admins;
 	}
 	
-	public void addAdmin(User admin) {
-		admins.add(admin);
+	public boolean addAdmin(User admin) {
+		return admins.add(admin);
 	}
 	
 	public void removeAdmin(User admin) {
