@@ -1,5 +1,5 @@
 --logs in as given username/password
-curl --data "userName=poop&password=poop" -c "cookies.txt" http://localhost:9000/login
+curl --data "userName=caiyo&password=poop" -c "cookies.txt" http://localhost:9000/login
 
 --create group, given name, of logged in person 
 curl -b "cookies.txt" --data "name=newgroup" http://localhost:9000/api/groups
@@ -23,7 +23,7 @@ curl -b "cookies.txt" --data "name=list1&p1=price&p2=duedate&p3=amount&req_p3=re
 curl -b "cookies.txt" -X DELETE http://localhost:9000/api/lists/2
 
 --add item
-curl -b "cookies.txt" --data "name=item1&price=2&duedate=2014&amount=15" http://localhost:9000/api/lists/1
+curl -b "cookies.txt" --data "name=item2&Qty=10" http://localhost:9000/api/lists/6
 
 --delete item
 curl -b "cookies.txt" -X DELETE http://localhost:9000/api/lists/3/item/1

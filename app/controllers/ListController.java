@@ -27,18 +27,28 @@ public class ListController extends Controller {
         Group group = Group.findById(Long.parseLong(groupId));
         String req = "req_"; //flag used to check if form data is a 'required' checkbox
         if(currentUser.isMember(group)){
+            int i;
+            String propertyKey;
+            String propertyValue;
+            
             Set<ListProperty> listProperties = new HashSet<>();
             Map<String,String> formData = Form.form().bindFromRequest().data();
             ItemList list = new ItemList(formData.get("name"));
+      
             for(Map.Entry<String, String> data : formData.entrySet()){
-                    //doesnt get the name form data and checks that
-                    //data is not a checkbox (prefixed by 'req_')
-                   if(!data.getKey().equals("name") 
-                      && data.getValue()!=null && !data.getValue().isEmpty()
-                      && !data.getKey().contains(req)){
-                       listProperties.add(new ListProperty(data.getValue(),                                                                   
-                                           formData.containsKey(req+data.getKey())));
-                   }
+                propertyKey = data.getKey();
+                propertyValue = data.getValue();
+                //doesnt get the name form data and checks that
+                //data is not a checkbox (prefixed by 'req_')
+                
+                if(!propertyKey.equals("name") 
+                        && propertyValue!=null && !propertyValue.isEmpty()
+                        && !propertyKey.contains(req)){
+                  //get property order value based on form data name
+                   i = Integer.parseInt(propertyKey.substring(propertyKey.length()-1));
+                   listProperties.add(new ListProperty(propertyValue,                                                                   
+                                       formData.containsKey(req+propertyKey), i));
+               }
             }
             return ok(toJson(ItemList.createList(currentUser, group, list, listProperties)));
         }
@@ -64,7 +74,7 @@ public class ListController extends Controller {
                     itemPropVals.add(ipv);
                 }
                 else{
-                    badRequest("1 or more of the fields cannot be null");
+                    return badRequest("1 or more of the fields cannot be null");
                 }
 
             }

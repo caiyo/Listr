@@ -86,12 +86,25 @@
 				console.log(status);
 				callback(data, status);
 			});
-		}
+		};
 		
 		service.deleteList = function (listId, callback){
 			$http({
 				method: "DELETE",
 				url: "/api/lists/"+listId,
+			}).success(function(data, status){
+				callback(data, status);
+			}).error(function(data,status){
+				console.log(status);
+				callback(data, status);
+			});
+		};
+		
+		service.addItem = function(listId, item, callback){
+			$http({
+				method: "POST",
+				url: "/api/lists/"+listId,
+				data: item
 			}).success(function(data, status){
 				callback(data, status);
 			}).error(function(data,status){

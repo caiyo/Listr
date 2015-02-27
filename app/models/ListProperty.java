@@ -28,10 +28,13 @@ public class ListProperty {
     
     private boolean isRequired;
     
+    private int orderValue;
+    
     public ListProperty(){}
-    public ListProperty(String propertyName, boolean isRequired){
+    public ListProperty(String propertyName, boolean isRequired, int orderValue){
         this.propertyName=propertyName;
         this.isRequired=isRequired;
+        this.orderValue=orderValue;
     }
     
     /*
@@ -61,6 +64,9 @@ public class ListProperty {
     }
     public void setRequired(boolean isRequired) {
         this.isRequired = isRequired;
+    }
+    public int getOrderValue(){
+        return orderValue;
     }
     /*
      * END GETTERS AND SETTERS

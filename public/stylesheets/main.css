@@ -10,6 +10,15 @@ html {
 tr{
 	overflow:hidden;
 }
+
+.row{
+	margin-bottom: 5px;
+}
+
+.table-nonfluid {
+   width: auto !important;
+}
+
 .wrapper{
     padding-left: 250px;
 }

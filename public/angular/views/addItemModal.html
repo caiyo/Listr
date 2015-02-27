@@ -1,0 +1,22 @@
+<div>
+        <div class="modal-header">
+            <h3 class="modal-title">Add Item</h3>
+        </div>
+        
+        <div class="modal-body">
+            {{error}}
+            <div class='form-group'>
+                <label for="itemName" class="control-label" >Item Name *</label>
+                <input id ='itemName' class='form-control' type="text" name="name" placeholder="Enter Name" ng-model="item.name">
+            </div>
+			<div class='form-group' ng-repeat="property in list.properties | orderBy:'orderValue'">
+			     <label for="{{property.propertyName}}" class="control-label" >{{property.propertyName}} {{property.required ? "*" : ""}}</label>
+			     <input id="{{property.propertyName}}" class='form-control' type="text" name="{{property.propertyName}}" placeholder="Enter Value" ng-model="item[property.propertyName]">
+			 </div>            
+        </div>
+        
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+</div>

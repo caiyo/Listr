@@ -1,6 +1,6 @@
 (function(){
 
-	var ListProvider = function($location){
+	var ListProvider = function($location, GroupProvider){
 		var provider = {};
 		var currentList={};
 		
@@ -11,6 +11,10 @@
 		provider.setList=function(list){
 			currentList=list;
 		}
+		
+		provider.findList= function(groupId, listId){
+			return GroupProvider.getGroupList(groupId,listId);
+		};
 
 		return provider;
 	};

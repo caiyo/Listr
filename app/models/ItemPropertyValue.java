@@ -1,5 +1,7 @@
 package models;
 
+import static play.libs.Json.toJson;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

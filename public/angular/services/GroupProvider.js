@@ -34,7 +34,16 @@
 			}
 			console.log("Group not found");
 			return null;
-		}
+		};
+		
+		provider.getGroupList= function(groupId, listId){
+			var groupLists = provider.getGroup(groupId).lists;
+			for( var i=0; i<groupLists.length; i++){
+				if(groupLists[i].id==listId)
+					return groupLists[i];
+			}
+			return null;
+		};
 		
 		
 		return provider;

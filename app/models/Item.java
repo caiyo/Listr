@@ -1,4 +1,6 @@
 package models;
+import static play.libs.Json.toJson;
+
 import java.util.HashMap;
 import java.util.Set;
 
@@ -75,13 +77,17 @@ public class Item {
 	public void setDone(boolean done){
 	    this.done=done;
 	}
+    public Set<ItemPropertyValue>  getProperties(){
+        return properties;
+    }
 	public void setProperties(Set<ItemPropertyValue> properties){
 	    this.properties=properties;
 	}
     /*
      * END GETTERS AND SETTERS
      */
-	public HashMap<String, String> getProperties(){
+	
+	public HashMap<String, String> propertiesMap(){
 	    HashMap<String, String> propertyMap = new HashMap<>();
 	    for(ItemPropertyValue ipv : properties){
 	        propertyMap.put(ipv.getListProperty().getPropertyName(), ipv.getValue());
@@ -97,10 +103,11 @@ public class Item {
 	    item.setCreator(creator);
 	    item.setList(list);
 	    item.setDone(false);
-	    item.setProperties(ipv);
+	    
 	    for(ItemPropertyValue i : ipv){
 	        ItemPropertyValue.createItemPropertyValue(i);
 	    }
+	    item.setProperties(ipv);
 	    JPA.em().persist(item);
 	    return item;
 	}
