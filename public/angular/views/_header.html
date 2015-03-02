@@ -1,7 +1,7 @@
-<div class='navbar navbar-default navbar-static-top'>
+<div class='navbar navbar-default navbar-static-top' ng-controller="HeaderCtrl">
 			<div class='container'>
 				<div class='navbar-header'>
-					<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='.navbar-collapse'>
+					<button type='button' class='navbar-toggle collapsed' ng-click="isCollapsed = !isCollapsed" >
 						<span class='sr-only'>Toggle Navigation</span>
 						<span class='icon-bar'></span>
 						<span class='icon-bar'></span>
@@ -9,7 +9,7 @@
 					</button>
 					<a class='navbar-brand logo' href='#/'>LISTr</a>
 				</div>
-				<div class='navbar-collapse collapse'>
+				<div class='navbar-collapse' collapse="isCollapsed">
 					<ul class='nav navbar-nav'>
 						<li>
 							<a href="#/">Home</a>
@@ -28,7 +28,7 @@
 		   					</a>
 		   				</li>
 		   				<li>
-		   					<a>Logout</a>
+		   					<a ng-controller="LogoutCtrl" ng-click="logout()">Logout</a>
 		   				</li>
 						</ul>
 				</div>			

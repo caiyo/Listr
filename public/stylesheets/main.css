@@ -7,6 +7,9 @@ h3 {
 html {
     height: 100%;
 }
+body{
+	height:100%;
+}
 tr{
 	overflow:hidden;
 }
@@ -19,8 +22,9 @@ tr{
    width: auto !important;
 }
 
-.wrapper{
+#content{
     padding-left: 250px;
+    overflow: auto;
 }
 .container-fluid{
 	overflow: hidden;

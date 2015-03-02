@@ -1,6 +1,5 @@
 (function(){
 	var module = angular.module("listr");
-	console.log("test");
 	var LoginCtrl = function($scope, AuthenticationService){
 		console.log("insid controler");
 		$scope.login=function(username, password){

@@ -94,17 +94,6 @@ public class ListController extends Controller {
         return ok(toJson(item));
     }
     
-    @Transactional
-    public static Result checkOffItem(String listId, String itemId){
-        User currentUser = User.findByUserName(request().username());
-        Item item = Item.findById(Long.parseLong(itemId));
-        ItemList list = ItemList.findById(Long.parseLong(listId));
-        if(currentUser.isMember(list.getGroup()) && list.containsItem(item)){
-            item.setDone(!item.getDone()); //checks/unchecks item based on current status
-            return ok(toJson(item));
-        }
-        return badRequest("item not in list or doesnt exist");
-    }
     
     @Transactional
     public static Result deleteList(String listId){
@@ -135,5 +124,41 @@ public class ListController extends Controller {
             lists.addAll(g.getLists());
         }
         return ok(toJson(lists));
+    }
+    
+    @Transactional
+    public static Result getList(String listId){
+        User currentUser = User.findByUserName(request().username());     
+        ItemList list = ItemList.findById(Long.parseLong(listId));
+        if(list == null)
+            return badRequest("list doesnt exist");
+        if(currentUser.isMember(list.getGroup())){
+            return ok(toJson(list));
+        }
+        return unauthorized("Cannot view list you are not a member of");
+    }
+    
+    @Transactional
+    public static Result checkOffItem(String listId, String itemId){
+        User currentUser = User.findByUserName(request().username());
+        Item item = Item.findById(Long.parseLong(itemId));
+        ItemList list = ItemList.findById(Long.parseLong(listId));
+        if(currentUser.isMember(list.getGroup()) && list.containsItem(item)){
+            item.setDone(!item.getDone()); //checks/unchecks item based on current status
+            return ok(toJson(item));
+        }
+        return badRequest("item not in list or doesnt exist");
+    }
+    
+    @Transactional
+    public static Result deleteItem(String listId, String itemId){
+        User currentUser = User.findByUserName(request().username());
+        Item item = Item.findById(Long.parseLong(itemId));
+        ItemList list = ItemList.findById(Long.parseLong(listId));
+        if(currentUser.isMember(list.getGroup()) && list.containsItem(item)){
+            Item.deleteItem(item);
+            return ok();
+        }
+        return badRequest("item not in list or doesnt exist");
     }
 }

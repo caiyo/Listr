@@ -12,7 +12,7 @@
 									AuthenticationService.setCredentials(data);
 								}
 								else{
-									alert("error logging in");
+									console.log("error logging in");
 								}
 							});
 						else{

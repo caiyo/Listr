@@ -12,9 +12,7 @@
 			currentList=list;
 		}
 		
-		provider.findList= function(groupId, listId){
-			return GroupProvider.getGroupList(groupId,listId);
-		};
+		
 
 		return provider;
 	};

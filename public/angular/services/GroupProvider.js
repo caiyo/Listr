@@ -2,12 +2,14 @@
 
 	var GroupProvider = function($location){
 		var provider = {};
-		var selected ={};
+		var selected ={
+				group : {}
+		};
 		var groups = [];
 		
 		provider.setSelected= function(group){
-			console.log("set selected group to: "+ group.id);
-			selected = group;
+			group.display=true;
+			selected.group = group;
 			return selected;
 		}
 		
@@ -20,11 +22,12 @@
 		}
 		
 		provider.setGroups = function(userGroups){
-			groups=userGroups;
+			for(var i =0; i<userGroups.length; i++){
+				groups.push(userGroups[i]);
+			}
 		}
 		
-		provider.getGroup = function(groupId){
-			console.log("Looking for groupid: "+ groupId);
+		/*provider.getGroup = function(groupId){
 			for(var i=0; i<groups.length; i++){
 				console.log("group id: "+ groups[i].id);
 				if(groups[i].id == groupId){
@@ -33,8 +36,8 @@
 				}
 			}
 			console.log("Group not found");
-			return null;
-		};
+			return {};
+		};*/
 		
 		provider.getGroupList= function(groupId, listId){
 			var groupLists = provider.getGroup(groupId).lists;

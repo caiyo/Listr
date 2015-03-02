@@ -11,7 +11,18 @@
 			.success(function(data, status){
 				callback(data,status);
 			});
-			
+		};
+		
+		service.getGroup= function(groupId, callback){
+			$http({
+				method: "GET",
+				url: "/api/groups/"+groupId,
+			})
+			.success(function(data, status){
+				callback(data,status);
+			}).error(function(data,status){
+				callback(data,status);
+			});
 		};
 		
 		service.addUserToGroup = function(groupId, userToAdd, isAdmin, callback){
@@ -75,6 +86,18 @@
 			});
 		};
 		
+		service.getList= function(listId, callback){
+			$http({
+				method: "GET",
+				url: "/api/lists/"+listId,
+			})
+			.success(function(data, status){
+				callback(data,status);
+			}).error(function(data,status){
+				callback(data,status);
+			});
+		};
+		
 		service.createList = function (groupId, data, callback){
 			$http({
 				method: "POST",
@@ -105,6 +128,18 @@
 				method: "POST",
 				url: "/api/lists/"+listId,
 				data: item
+			}).success(function(data, status){
+				callback(data, status);
+			}).error(function(data,status){
+				console.log(status);
+				callback(data, status);
+			});
+		}
+		
+		service.deleteItem = function(listId, itemId, callback){
+			$http({
+				method: "DELETE",
+				url: "/api/lists/"+listId+"/item/"+itemId
 			}).success(function(data, status){
 				callback(data, status);
 			}).error(function(data,status){

@@ -9,8 +9,11 @@
 	<script src="@routes.Assets.at("angular/app.js")"></script>
 	<script src="@routes.Assets.at("angular/controllers/UserCtrl.js")"></script>
     <script src="@routes.Assets.at("angular/controllers/MainCtrl.js")"></script>
+    <script src="@routes.Assets.at("angular/controllers/HeaderCtrl.js")"></script>
+    <script src="@routes.Assets.at("angular/controllers/SidebarCtrl.js")"></script>
 	<script src="@routes.Assets.at("angular/controllers/SignupCtrl.js")"></script>
 	<script src="@routes.Assets.at("angular/controllers/LoginCtrl.js")"></script>
+	<script src="@routes.Assets.at("angular/controllers/LogoutCtrl.js")"></script>
 	<script src="@routes.Assets.at("angular/services/Listr.js")"></script>
 	
 	<script src="@routes.Assets.at("angular/controllers/GroupCtrl.js")"></script>
@@ -28,8 +31,8 @@
    
   </head>
 
-  <body ng-controller="UserCtrl">
-  	<div ng-controller="MainCtrl" ng-show="user">
+  <body ng-controller="MainCtrl">
+  	<div ng-show="user">
   		<div id="topBar" ng-include="'/assets/angular/views/_header.html'"></div>
   		<div id="mainContainer">
   		    <div id="sidebar-wrapper" ng-include="'/assets/angular/views/_sidebar.html'"></div>

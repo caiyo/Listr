@@ -2,23 +2,34 @@
     <h1>{{list.name}}</h1>
     <div class="row">
         <div class="col-sm-3">
-            <button class="btn btn-primary" ng-controller="ModalCtrl" ng-click="open('addItem', list)">Add Item</button>
+			<div class="btn-group" dropdown>
+	            <button class="btn btn-primary" ng-controller="ModalCtrl" ng-click="open('addItem', list)">Add Item</button>
+	            <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+	                <span class="caret"></span>
+	                <span class="sr-only">Split button!</span>
+	            </button>
+	            <ul class="dropdown-menu" role="menu">
+	                <li><a ng-click="deleteItems(list)">Delete</a></li>
+	                <li><a>Another action</a></li>
+	                <li><a>Something else here</a></li>
+	            </ul>
+	        </div>
         </div>
         
     </div>
     <div class="row">
 	    <div class="col-sm-6">
-	        <table class='table  table-bordered'>
+	        <table class='table   table-bordered'>
 	            <thead>
 	                <tr>
-	                    <th></th>     
+	                    <th class="col-md-1"></th>     
 	                    <th>Name</th>
 	                    <th ng-repeat="property in list.properties | orderBy:'orderValue'">{{property.propertyName}}</th>
 	                </tr>
 	            </thead>
 	            <tbody>
-	                <tr ng-repeat="item in list.items | orderBy:'name'">
-	                    <td><input id='completedCheckbox' name='completed' type='checkbox' value='true'></td>
+	                <tr ng-repeat="item in list.items | orderBy:'name'" ng-class="isCompleted(item)">
+	                    <td><input id='completedCheckbox' name='completed' type='checkbox' value='true' ng-model="itemChecked[item.id]"></td>
 	                    <td>{{item.name}}</td>
 	                    <td ng-repeat="property in item.properties | orderBy:'listProperty.orderValue'">{{property.value}}</td>
 	                </tr>
@@ -26,7 +37,7 @@
 	            <tfoot>
 	            </tfoot>
 	        </table>
-	
+	           {{itemChecked}}
 	    </div>
     </div>
 	

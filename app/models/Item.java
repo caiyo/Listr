@@ -112,6 +112,10 @@ public class Item {
 	    return item;
 	}
 	
+	public static void deleteItem(Item item){
+	    JPA.em().remove(item);
+	}
+	
 	public static Item findById(long id){
         return JPA.em().find(Item.class, id);
     }

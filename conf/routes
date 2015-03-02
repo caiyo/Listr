@@ -8,24 +8,33 @@ OPTIONS /*all                                       controllers.Application.pref
 GET     /                                           controllers.Application.index()
 
 GET     /signup                                     controllers.Application.signUp()
-POST    /signup                                     controllers.AccountController.createAccount()
 
 GET	    /login                                      controllers.Application.login()
-POST    /login                                      controllers.Application.authenticate()
 
 #########API##############
+
+#Account api
+GET     /api/user                                   controllers.AccountController.getAccountUser()
+POST    /api/login                                  controllers.Application.authenticate()
+POST    /api/logout                                 controllers.Application.logout()
+POST    /api/signup                                 controllers.AccountController.createAccount()
 
 #Group api
 GET     /api/groups                                 controllers.GroupController.getGroups()
 POST    /api/groups                                 controllers.GroupController.createGroup()
+GET     /api/groups/:id                             controllers.GroupController.getGroup(id:String)
 POST    /api/groups/:id                             controllers.GroupController.actionRouter(id:String)
 
 #List api
 GET     /api/groups/:id/lists                       controllers.ListController.getListsinGroup(id:String)
-GET     /api/lists                                  controllers.ListController.getAllLists()
 POST    /api/groups/:id/lists                       controllers.ListController.createList(id:String)
+GET     /api/lists                                  controllers.ListController.getAllLists()
+GET     /api/lists/:id                              controllers.ListController.getList(id:String)
 POST    /api/lists/:id                              controllers.ListController.addItem(id:String)
-DELETE  /api/lists/:listid                          controllers.ListController.deleteList(listid:String)
+DELETE  /api/lists/:id                              controllers.ListController.deleteList(id:String)
+
+#Item api
+DELETE  /api/lists/:listid/item/:itemid             controllers.ListController.deleteItem(listid:String, itemid:String)
 PUT     /api/lists/:listid/item/:itemid/checkoff    controllers.ListController.checkOffItem(listid:String, itemid:String)
 
 # Map static resources from the /public folder to the /assets URL path

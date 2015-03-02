@@ -98,4 +98,16 @@ public class GroupController extends Controller {
         return ok(toJson(currentUser.getGroups()));
     }
 
+    @Transactional
+    public static Result getGroup(String groupId){
+        User currentUser = User.findByUserName(request().username());
+        Group g = Group.findById(Long.parseLong(groupId));
+        if(g==null){
+            return badRequest("Group doesn't exist");
+        }
+        if(currentUser.isMember(g)){
+            return ok(toJson(g));
+        }
+        return unauthorized("Not Authorized");
+    }
 }
