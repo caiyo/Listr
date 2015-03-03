@@ -23,6 +23,7 @@ public class ItemPropertyValue {
     
     @ManyToOne
     @JoinColumn(name="listProperty_id")
+    @JsonIgnore
     private ListProperty listProperty;
     @ManyToOne
     @JoinColumn(name="item_id")

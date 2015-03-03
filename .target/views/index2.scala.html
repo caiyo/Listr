@@ -32,12 +32,12 @@
   </head>
 
   <body ng-controller="MainCtrl">
-  	<div ng-show="user">
+  	<div ng-show="user" class="wrapper">
   		<div id="topBar" ng-include="'/assets/angular/views/_header.html'"></div>
   		<div id="mainContainer">
   		    <div id="sidebar-wrapper" ng-include="'/assets/angular/views/_sidebar.html'"></div>
   		    <div id="content">
-  		        <div class="container-fluid" ng-view></div>
+  		        <div id="main-content" class="container-fluid" ng-view></div>
   		     </div>
   		</div>
   		

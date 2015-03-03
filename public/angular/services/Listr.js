@@ -141,6 +141,17 @@
 				method: "DELETE",
 				url: "/api/lists/"+listId+"/item/"+itemId
 			}).success(function(data, status){
+				callback(itemId, status);
+			}).error(function(data,status){
+				console.log(status);
+				callback(itemId, status);
+			});
+		}
+		service.checkoffItem = function(listId,itemId, callback){
+			$http({
+				method: "PUT",
+				url: "/api/lists/"+listId+"/item/"+itemId+"/checkoff",
+			}).success(function(data, status){
 				callback(data, status);
 			}).error(function(data,status){
 				console.log(status);

@@ -30,28 +30,62 @@
 			}
 		};
 		
+		$scope.addRemoveItemSelected= function(item){
+			if($scope.selectedItems[item.id]){
+				console.log("removed item");
+				delete $scope.selectedItems[item.id];
+			}
+			else{
+				console.log('added item');
+				$scope.selectedItems[item.id] = item;
+			}
+				
+		}
+		
 		$scope.deleteItems = function(list){
-			for(var key in $scope.itemChecked){
-				ListrService.deleteItem(list.id, key, function(data, status){
+			var numItemSelected = Object.keys($scope.selectedItems).length;
+			if(numItemSelected>0 &&
+					confirm("Are you sure you want to delete " + numItemSelected + " item(s)?")){
+				for(var key in $scope.selectedItems){
+					ListrService.deleteItem(list.id, key, function(data, status){
+						if(status==200){
+							console.log("deleting: " + data);
+							removeItemFromList(list, data);
+							delete $scope.selectedItems[data];
+						}
+						else{
+							console.log("error deleting item from list" );
+						}
+					});
+				}	
+			}
+			
+		};
+		
+		$scope.checkOff = function(list){
+			for(var key in $scope.selectedItems){
+				ListrService.checkoffItem(list.id, key, function(data, status){
 					if(status==200){
-						console.log("deleting: " + key);
-						removeItemFromList(list, key);
-						delete $scope.itemChecked[key];
+						console.log("Checking off: " + data.id);
+						$scope.selectedItems[data.id].done = !$scope.selectedItems[data.id].done
+						$scope.addRemoveItemSelected(data);
 					}
 					else{
 						console.log("error deleting item from list" );
 					}
 				});
 			}
-		};
+		}
 		
-		
-		
-		$scope.isCompleted= function(item){
+		$scope.isCheckedOff= function(item){
 			return item.done ? "item-checkedoff" : null
 		};
 		
-		$scope.itemChecked = {};
+		$scope.checkbox = {};
+		
+		$scope.selectedItems = {};
+		
+		$scope.displayCheckedoff=false;
 		
 		getList($routeParams.groupId, $routeParams.listId);
 		

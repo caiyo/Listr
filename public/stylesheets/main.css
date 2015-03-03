@@ -32,7 +32,9 @@ tr{
 .navbar{
 	margin-bottom: 5px;
 }
-
+#main-content{
+	min-height: 200px;
+}
 #mainContainer {
     width: 87%;
     overflow: auto;
@@ -86,4 +88,7 @@ tr{
 }
 .selected-member, .selected-admin, .selected-list{
 	background-color: #eee;
+}
+.item-checkedoff{
+	background-color: #d9534f;
 }
