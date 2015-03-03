@@ -3,6 +3,19 @@
 	var listr = function($rootScope, $http, $cookies){
 		var service = {};
 		
+		service.createGroup = function(groupName, callback){
+			$http({
+				method: "POST",
+				url: "/api/groups",
+				data: {
+					name: groupName
+				}
+			}).success(function(data,status){
+				callback(data,status);
+			}).error(function(data,status){
+				callback(data,status);
+			});
+		}
 		service.getGroups = function(callback){
 			$http({
 				method: "GET",
@@ -24,6 +37,17 @@
 				callback(data,status);
 			});
 		};
+		
+		service.deleteGroup = function(groupId, callback){
+			$http({
+				method: "DELETE",
+				url: "/api/groups/"+groupId
+			}).success(function(data,status){
+				callback(data,status)
+			}).error(function(data,status){
+				callback(data,status);
+			});
+		}
 		
 		service.addUserToGroup = function(groupId, userToAdd, isAdmin, callback){
 			$http({

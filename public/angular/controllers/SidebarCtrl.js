@@ -22,6 +22,20 @@
 			ListProvider.setList(list);
 			$location.path("/group/"+group.id+"/list/"+list.id);
 		}
+		
+		$scope.removeGroup = function(group){
+			ListrService.deleteGroup(group.id, function(data,status){
+				if (status==200){
+					GroupProvider.removeGroup(data.id);
+					$scope.select($scope.groups[0]);
+				}
+				else{
+					console.log("Could not delete group: " + data.id);
+				}
+			});
+			
+			
+		}
 
 		$scope.selected=GroupProvider.getSelected();
 	};

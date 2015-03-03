@@ -6,11 +6,13 @@
         <div class="modal-body">
             {{error}}
             <div class='form-group'>
+                <label for="name" class="control-label" >List Name </label>
                 <input id ='name' class='form-control' type="text" name="name" placeholder="Enter List Name" ng-model="listForm.name">
             </div>
-            <form class='form-group' ng-repeat="property in listForm.properties"> 
+            <form class='form-group' ng-repeat="(index, property) in listForm.properties"> 
+	            <label for="prop{{index}}" class="control-label" >Property {{index+1}}</label>
 	            <div class="form-inline">
-	                <input id ='name' class='form-control' type="text" name="name" placeholder="Enter Property for List" ng-model="property.propName">
+	                <input id ='prop{{index}}' class='form-control' type="text" name="prop{{index}}" placeholder="Enter Property for List" ng-model="property.propName">
 	                <input id='reqCheckbox' name='required' type='checkbox' value='true' ng-model="property.req"> Required?                 
 	                    
 	            </div>

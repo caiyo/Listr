@@ -94,6 +94,10 @@ public class Group {
 		return group;
 	}
 	
+	public static void deleteGroup(Group group){
+	    JPA.em().remove(group);
+	}
+	
 	public static Group findById(long id){
 	    return JPA.em().find(Group.class, id);
 	}

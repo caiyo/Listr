@@ -110,4 +110,19 @@ public class GroupController extends Controller {
         }
         return unauthorized("Not Authorized");
     }
+    
+    //User must be an admin of a group to delete it
+    @Transactional
+    public static Result deleteGroup(String groupId){
+        User currentUser = User.findByUserName(request().username());
+        Group g = Group.findById(Long.parseLong(groupId));
+        if(g==null){
+            return badRequest("Group doesn't exist");
+        }
+        if(currentUser.isAdmin(g)){
+            Group.deleteGroup(g);
+            return ok(toJson(g));
+        }
+        return unauthorized("Not Authorized");
+    }
 }

@@ -85,6 +85,8 @@
 		
 		$scope.selectedItems = {};
 		
+		$scope.mouseOverTitle = false;
+		
 		$scope.displayCheckedoff=false;
 		
 		getList($routeParams.groupId, $routeParams.listId);

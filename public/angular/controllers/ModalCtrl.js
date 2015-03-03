@@ -13,6 +13,10 @@
 			addItem:{
 				templateUrl: "/assets/angular/views/addItemModal.html",
 				controller: "AddItemModalInstanceCtrl"
+			},
+			createGroup:{
+				templateUrl: "/assets/angular/views/createGroupModal.html",
+				controller: "createGroupModalInstanceCtrl"
 			}
 		};
 		$scope.open = function(action, obj){
@@ -131,10 +135,34 @@
 		}
 	};
 	
+	var createGroupModalInstanceCtrl = function($scope,$modalInstance, GroupProvider, ListrService, obj){
+		$scope.groupName;
+		
+		$scope.ok = function(){
+			console.log($scope.groupName);
+			ListrService.createGroup($scope.groupName, function(data,status){
+				if(status==200){
+					GroupProvider.setGroups([data]);
+				}
+				else{
+					console.log("error creating group");
+				}
+			});
+			$modalInstance.close();		
+
+		}
+		
+		$scope.cancel = function(){
+			console.log("Cancelling")
+			$modalInstance.dismiss("cancel");
+		}
+	};
+	
 	var module = angular.module("listr");
 	module.controller("ModalCtrl", modalCtrl);
 	module.controller("AddGroupModalInstanceCtrl", addGroupModalInstanceCtrl);
 	module.controller("CreateListModalInstanceCtrl", createListModalInstanceCtrl);
 	module.controller("AddItemModalInstanceCtrl", addItemModalInstanceCtrl);
+	module.controller("createGroupModalInstanceCtrl", createGroupModalInstanceCtrl);
 
 }());
