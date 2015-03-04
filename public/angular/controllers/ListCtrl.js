@@ -16,6 +16,10 @@
 					if(status ==200){
 						$scope.list=data;
 					}
+					else if (status == 401){
+						console.log(data);
+						$location.path("/");
+					}
 					else{
 						console.log(data);
 					}

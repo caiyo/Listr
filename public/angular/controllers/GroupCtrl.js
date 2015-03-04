@@ -31,6 +31,10 @@
 						$scope.group=GroupProvider.getSelected().group;
 						$scope.isAdmin = isAdmin();
 					}
+					else if (status == 401){
+						console.log(data);
+						$location.path("/");
+					}
 					else{
 						console.log(data);
 					}

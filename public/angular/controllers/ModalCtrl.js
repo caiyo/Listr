@@ -17,6 +17,10 @@
 			createGroup:{
 				templateUrl: "/assets/angular/views/createGroupModal.html",
 				controller: "createGroupModalInstanceCtrl"
+			},
+			updateGroupList:{
+				templateUrl: "/assets/angular/views/updateGroupListModal.html",
+				controller: "updateGroupListModalInstanceCtrl"
 			}
 		};
 		$scope.open = function(action, obj){
@@ -135,7 +139,7 @@
 		}
 	};
 	
-	var createGroupModalInstanceCtrl = function($scope,$modalInstance, GroupProvider, ListrService, obj){
+	var createGroupModalInstanceCtrl = function($scope,$modalInstance, $location, GroupProvider, ListrService, obj){
 		$scope.groupName;
 		
 		$scope.ok = function(){
@@ -143,6 +147,8 @@
 			ListrService.createGroup($scope.groupName, function(data,status){
 				if(status==200){
 					GroupProvider.setGroups([data]);
+					$location.path("/group/"+ data.id);
+					
 				}
 				else{
 					console.log("error creating group");
@@ -158,11 +164,51 @@
 		}
 	};
 	
+	var updateGroupListModalInstanceCtrl = function($scope,$modalInstance, $location, GroupProvider, ListrService, obj){
+		//obj is either a list or group
+		$scope.obj=obj; 
+		$scope.updatedName=obj.name;
+		$scope.ok = function(){
+			if ($scope.type =="List"){
+				ListrService.updateListName(obj.id, $scope.updatedName, function(data,status){
+					if(status==200)
+						obj.name=data.name;
+					else
+						$scope.error=data;
+				})
+				obj.name=$scope.updatedName;
+				console.log("new list name: " + $scope.updatedName);
+			}
+				
+			else if ($scope.type == "Group"){
+				ListrService.updateGroupName(obj.id, $scope.updatedName, function(data,status){
+					if(status==200){
+						obj.name=data.name;
+						GroupProvider.getGroup(data.id).name=data.name;
+					}
+					else{
+						$scope.error=data;
+					}
+						
+				})
+				
+				console.log("new list name: " + $scope.updatedName);
+			}
+			$modalInstance.close();		
+		}
+		
+		$scope.cancel = function(){
+			console.log("Cancelling")
+			$modalInstance.dismiss("cancel");
+		}
+	};
+	
 	var module = angular.module("listr");
 	module.controller("ModalCtrl", modalCtrl);
 	module.controller("AddGroupModalInstanceCtrl", addGroupModalInstanceCtrl);
 	module.controller("CreateListModalInstanceCtrl", createListModalInstanceCtrl);
 	module.controller("AddItemModalInstanceCtrl", addItemModalInstanceCtrl);
 	module.controller("createGroupModalInstanceCtrl", createGroupModalInstanceCtrl);
+	module.controller("updateGroupListModalInstanceCtrl", updateGroupListModalInstanceCtrl);
 
 }());

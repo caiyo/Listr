@@ -16,20 +16,24 @@
 				selected.group = {};
 			
 			return selected;
-		}
+		};
 		
 		provider.getSelected= function(){
 			return selected;
-		}
+		};
 		
 		provider.getGroups= function(){
 			return groups;
-		}
+		};
 		
 		provider.setGroups = function(userGroups){
 			for(var i =0; i<userGroups.length; i++){
 				groups.push(userGroups[i]);
 			}
+		};
+		provider.clearGroups =function(){
+			groups.splice(0,groups.length);
+			selected.group={};
 		}
 		provider.removeGroup = function(groupId){
 			for(var i=0; i<groups.length; i++){
@@ -37,7 +41,13 @@
 					return groups.splice(i,1);
 				}
 			}
-		}		
+		};
+		provider.getGroup = function(groupId){
+			for(var i=0; i<groups.length; i++){
+				if(groups[i].id == groupId)
+					return groups[i];
+			}
+		};
 		return provider;
 	};
 	var module = angular.module("listr");

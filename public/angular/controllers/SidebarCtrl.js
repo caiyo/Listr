@@ -27,7 +27,10 @@
 			ListrService.deleteGroup(group.id, function(data,status){
 				if (status==200){
 					GroupProvider.removeGroup(data.id);
-					$scope.select($scope.groups[0]);
+					if($scope.groups.length > 0)
+						$scope.select($scope.groups[0]);
+					else
+						$location.path("/");
 				}
 				else{
 					console.log("Could not delete group: " + data.id);
@@ -36,6 +39,7 @@
 			
 			
 		}
+		
 
 		$scope.selected=GroupProvider.getSelected();
 	};

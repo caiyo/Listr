@@ -111,6 +111,28 @@ public class GroupController extends Controller {
         return unauthorized("Not Authorized");
     }
     
+    @Transactional
+    public static Result updateGroupName(String groupId){
+        User currentUser = User.findByUserName(request().username());
+        Group g = Group.findById(Long.parseLong(groupId));
+        DynamicForm f = Form.form().bindFromRequest();
+        String newName=f.get("name");
+        if(g==null){
+            return badRequest("Group doesn't exist");
+        }
+        if(currentUser.isAdmin(g)){
+            if(newName !=null && !newName.trim().isEmpty()){
+                g.setName(newName);
+                return ok(toJson(g));
+            }
+            else{
+                return badRequest("Name cannot be empty");
+            }
+            
+        }
+        return unauthorized("Not Authorized");
+    }
+    
     //User must be an admin of a group to delete it
     @Transactional
     public static Result deleteGroup(String groupId){

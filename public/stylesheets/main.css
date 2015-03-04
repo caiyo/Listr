@@ -92,3 +92,7 @@ tr{
 .item-checkedoff{
 	background-color: #d9534f;
 }
+
+#loginDiv{
+	margin-top: 15px;
+}

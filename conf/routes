@@ -24,7 +24,8 @@ GET     /api/groups                                 controllers.GroupController.
 POST    /api/groups                                 controllers.GroupController.createGroup()
 GET     /api/groups/:id                             controllers.GroupController.getGroup(id:String)
 POST    /api/groups/:id                             controllers.GroupController.actionRouter(id:String)
-DELETE  /api/groups/:id                              controllers.GroupController.deleteGroup(id: String)
+DELETE  /api/groups/:id                             controllers.GroupController.deleteGroup(id: String)
+PUT     /api/groups/:id                             controllers.GroupController.updateGroupName(id: String)
 
 #List api
 GET     /api/groups/:id/lists                       controllers.ListController.getListsinGroup(id:String)
@@ -32,6 +33,7 @@ POST    /api/groups/:id/lists                       controllers.ListController.c
 GET     /api/lists                                  controllers.ListController.getAllLists()
 GET     /api/lists/:id                              controllers.ListController.getList(id:String)
 POST    /api/lists/:id                              controllers.ListController.addItem(id:String)
+PUT     /api/lists/:id                              controllers.ListController.updateListName(id:String)
 DELETE  /api/lists/:id                              controllers.ListController.deleteList(id:String)
 
 #Item api

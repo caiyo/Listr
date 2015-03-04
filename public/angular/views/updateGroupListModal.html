@@ -1,0 +1,19 @@
+<div>
+        <div class="modal-header">
+            <h3 class="modal-title">Update {{type = (obj.lists ? "Group" : "List")}}</h3>
+        </div>
+        
+        <div class="modal-body">
+            {{error}}
+            <div class='form-group'>
+                <label for="name" class="control-label" >Updated {{type}} Name </label>
+                <input id ='name' class='form-control' type="text" name="name" value="{{updatedName}}" placeholder="Update {{type}} name" ng-model="updatedName">
+            </div>
+           
+        </div>
+        
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+</div>

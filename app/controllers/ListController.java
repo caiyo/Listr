@@ -13,6 +13,7 @@ import models.ItemList;
 import models.ItemPropertyValue;
 import models.ListProperty;
 import models.User;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
@@ -134,6 +135,26 @@ public class ListController extends Controller {
             return badRequest("list doesnt exist");
         if(currentUser.isMember(list.getGroup())){
             return ok(toJson(list));
+        }
+        return unauthorized("Cannot view list you are not a member of");
+    }
+    
+    @Transactional
+    public static Result updateListName(String listId){
+        User currentUser = User.findByUserName(request().username());     
+        ItemList list = ItemList.findById(Long.parseLong(listId));
+        DynamicForm f = Form.form().bindFromRequest();
+        String newName=f.get("name");
+        if(list == null)
+            return badRequest("list doesnt exist");
+        if(currentUser.isMember(list.getGroup())){
+            if(newName !=null && !newName.trim().isEmpty()){
+                list.setName(newName);
+                return ok(toJson(list));
+            }
+            else{
+                return badRequest("Name cannot be empty");
+            }        
         }
         return unauthorized("Cannot view list you are not a member of");
     }

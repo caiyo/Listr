@@ -1,6 +1,6 @@
 (function(){
 
-	var authentication = function($rootScope, $http){
+	var authentication = function($rootScope, $http, ListrService, GroupProvider){
 		var service = {};
 
 		service.login = function(username, password, callback){
@@ -28,8 +28,15 @@
 		};
 		
 		
-		service.setCredentials = function(data){
-			$rootScope.user=data;
+		service.setCredentials = function(user){
+			$rootScope.user=user;
+			//gets group data for sidebar
+			ListrService.getGroups(function(data, status){
+				if(status == 200){
+					console.log(data);
+					GroupProvider.setGroups(data);
+				}
+			});
 		};
 		
 		service.getCredentials = function(callback){

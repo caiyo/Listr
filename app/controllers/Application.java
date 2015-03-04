@@ -50,7 +50,6 @@ public class Application extends Controller {
     @Transactional
     public static Result logout(){
     	session().clear();
-    	flash("success", "You've been logged out");
     	return ok();
     }
     

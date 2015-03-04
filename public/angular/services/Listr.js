@@ -2,7 +2,9 @@
 
 	var listr = function($rootScope, $http, $cookies){
 		var service = {};
-		
+		/*
+		 * GROUP HTTP SERVICE METHODS
+		 */
 		service.createGroup = function(groupName, callback){
 			$http({
 				method: "POST",
@@ -38,6 +40,20 @@
 			});
 		};
 		
+		service.updateGroupName = function(groupId, newName, callback){
+			$http({
+				method: "PUT",
+				url: "/api/groups/"+groupId,
+				data:{
+					name: newName
+				}
+			}).success(function(data,status){
+				callback(data,status)
+			}).error(function(data,status){
+				callback(data,status);
+			});
+		}
+		
 		service.deleteGroup = function(groupId, callback){
 			$http({
 				method: "DELETE",
@@ -47,7 +63,7 @@
 			}).error(function(data,status){
 				callback(data,status);
 			});
-		}
+		};
 		
 		service.addUserToGroup = function(groupId, userToAdd, isAdmin, callback){
 			$http({
@@ -110,6 +126,14 @@
 			});
 		};
 		
+		/*
+		 * END GROUP HTTP SERVICE METHODS
+		 */
+		
+		
+		/*
+		 * List HTTP SERVICE METHODS
+		 */
 		service.getList= function(listId, callback){
 			$http({
 				method: "GET",
@@ -134,6 +158,20 @@
 				callback(data, status);
 			});
 		};
+		
+		service.updateListName = function(listId, newName, callback){
+			$http({
+				method: "PUT",
+				url: "/api/lists/"+listId,
+				data:{
+					name: newName
+				}
+			}).success(function(data,status){
+				callback(data,status)
+			}).error(function(data,status){
+				callback(data,status);
+			});
+		}
 		
 		service.deleteList = function (listId, callback){
 			$http({
@@ -182,6 +220,10 @@
 				callback(data, status);
 			});
 		}
+		
+		/*
+		 * END LIST HTTP SERVICE METHODS
+		 */
 		
 		return service;
 	};
