@@ -2,6 +2,9 @@
 	var module = angular.module("listr");
 
 	var SidebarCtrl = function($scope, ListrService, $location, GroupProvider, ListProvider){
+		
+		$scope.isCollapsed = false;
+		
 		$scope.groups=GroupProvider.getGroups();
 		
 		$scope.groupSelected=function(group){

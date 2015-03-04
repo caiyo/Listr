@@ -7,7 +7,7 @@
 		};
 		
 		$scope.memberSelected = function(member){
-			return member ===$scope.selectedMember? 'selected-member' : null;
+			return (member ===$scope.selectedMember)  && $scope.isAdmin? 'selected-tr' : null;
 		};
 		
 		$scope.promoteToAdmin = function(member, group){

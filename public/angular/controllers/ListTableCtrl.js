@@ -7,7 +7,7 @@
 		};
 		
 		$scope.listSelected = function(list){
-			return list ===$scope.selectedList? 'selected-list' : null;
+			return list ===$scope.selectedList? 'selected-tr' : null;
 		};
 		
 		$scope.deleteList = function(list, group){

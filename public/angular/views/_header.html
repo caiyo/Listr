@@ -1,36 +1,36 @@
 <div class='navbar navbar-default navbar-static-top' ng-controller="HeaderCtrl">
-			<div class='container'>
-				<div class='navbar-header'>
-					<button type='button' class='navbar-toggle collapsed' ng-click="isCollapsed = !isCollapsed" >
-						<span class='sr-only'>Toggle Navigation</span>
-						<span class='icon-bar'></span>
-						<span class='icon-bar'></span>
-						<span class='icon-bar'></span>
-					</button>
-					<a class='navbar-brand logo' href='#/'>LISTr</a>
-				</div>
-				<div class='navbar-collapse' collapse="isCollapsed">
-					<ul class='nav navbar-nav'>
-						<li>
-							<a href="#/">Home</a>
-						</li>
-						<li>
-							<a>FAQ</a>
-						</li>
-						<li>
-							<a>Help</a>
-						</li>
-					</ul>
-		   			<ul class='nav navbar-nav navbar-right'>
-		   				<li>
-		   					<a>
-		   						{{user.name}}
-		   					</a>
-		   				</li>
-		   				<li>
-		   					<a ng-controller="LogoutCtrl" ng-click="logout()">Logout</a>
-		   				</li>
-						</ul>
-				</div>			
-			</div>
+	<div class='container'>
+		<div class='navbar-header'>
+			<button type='button' class='navbar-toggle collapsed' ng-click="isCollapsed = !isCollapsed" >
+				<span class='sr-only'>Toggle Navigation</span>
+				<span class='icon-bar'></span>
+				<span class='icon-bar'></span>
+				<span class='icon-bar'></span>
+			</button>
+			<a class='navbar-brand logo' href='#/'>LISTr</a>
 		</div>
+		<div class='navbar-collapse' collapse="isCollapsed">
+			<ul class='nav navbar-nav'>
+				<li>
+					<a href="#/">Home</a>
+				</li>
+				<li>
+					<a>FAQ</a>
+				</li>
+				<li>
+					<a>Help</a>
+				</li>
+			</ul>
+	  			<ul class='nav navbar-nav navbar-right'>
+	  				<li>
+	  					<a>
+	  						{{user.name}}
+	  					</a>
+	  				</li>
+	  				<li>
+	  					<a ng-controller="LogoutCtrl" ng-click="logout()">Logout</a>
+	  				</li>
+				</ul>
+		</div>			
+	</div>
+</div>

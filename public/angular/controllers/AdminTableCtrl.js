@@ -7,7 +7,7 @@
 		};
 		
 		$scope.adminSelected = function(admin){
-			return admin ===$scope.selectedAdmin? 'selected-admin' : null;
+			return (admin ===$scope.selectedAdmin) && $scope.isAdmin? 'selected-tr' : null;
 		};
 		
 		$scope.removeAdmin = function(admin, group){

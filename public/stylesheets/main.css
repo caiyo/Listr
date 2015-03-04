@@ -9,11 +9,15 @@ html {
 }
 body{
 	height:100%;
+    background-color: rgb(199, 199, 199);
+
 }
 tr{
 	overflow:hidden;
 }
 
+.wrapper{
+}
 .row{
 	margin-bottom: 5px;
 }
@@ -23,7 +27,7 @@ tr{
 }
 
 #content{
-    padding-left: 250px;
+	padding-top: 5px;
     overflow: auto;
 }
 .container-fluid{
@@ -36,27 +40,25 @@ tr{
 	min-height: 200px;
 }
 #mainContainer {
-    width: 87%;
     overflow: auto;
     height: 100%;
     margin: auto;
-}
+}                                                       
 
 #sidebar-wrapper{
     float: left;
     display: block;
     margin-top: 0;
     height: 100%;
-    position: fixed;
-    width: 150px;
+    position: relative;
+    width: auto;
+    max-width: 150px;
     padding-left: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-    border-right: 1px solid grey;
     display:inline-block;
 }
 #sidebar-buttons{
-	padding-left: 10px;
 	margin-bottom: 5px;
 }
 
@@ -64,10 +66,15 @@ tr{
     border-right: 3px solid orange;
     border-left: 3px solid orange;
 }
-
-#content {
-    padding-left: 160px;
-    padding-top: 5px;
+.nav.navbar-nav li a {
+    color: white;
+}
+.navbar-default{
+    background-color: #428bca;
+    border-color: rgb(119, 116, 116);
+}
+.navbar-brand.logo{
+	color:white;
 }
 .nav-link:hover{
 	text-decoration: none;
@@ -79,6 +86,12 @@ tr{
     display: block;
     padding: 10px 15px;
 }
+.navbar-default .navbar-toggle .icon-bar{
+	background-color: white;
+}
+a{
+	color:black;
+}
  a:hover{
 	text-decoration: none;
 	cursor: pointer;
@@ -86,7 +99,7 @@ tr{
 #group-tables{
 	padding-top: 20px;
 }
-.selected-member, .selected-admin, .selected-list{
+.selected-tr{
 	background-color: #eee;
 }
 .item-checkedoff{
@@ -95,4 +108,27 @@ tr{
 
 #loginDiv{
 	margin-top: 15px;
+}
+.raised{
+	box-shadow: 0 10px 6px -6px #000;
+	padding-left:5px;
+	padding-right:5px;
+	background-color: white;
+	border-radius: 5px;
+
+}
+.inner-content{
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-right: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;	
+}
+.collapsing-width {
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: width 0.1s ease;
+    -moz-transition: width 0.1s ease;
+    -o-transition: width 0.1s ease;
+    transition: width 0.1s ease;
 }
