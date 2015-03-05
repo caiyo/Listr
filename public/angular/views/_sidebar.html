@@ -1,12 +1,13 @@
-<div ng-controller="SidebarCtrl">
-            <button type='button' class='btn btn-primary collapsed' ng-click="isCollapsed = !isCollapsed" >
-               <span class='sr-only'>Toggle Navigation</span>
-                <span class='icon-bar'></span>
-                <span class='icon-bar'></span>
-                <span class='icon-bar'></span>
-            </button>
-  
-	<div class="sidebar-nav" collapse-width="isCollapsed">
+<div ng-controller="SidebarCtrl" class="navbar">
+    
+        <div>
+			
+			<a  class='btn btn-primary' ng-click="isCollapsed = !isCollapsed" >
+			    <span class='glyphicon glyphicon glyphicon-list'  aria-hidden="true"></span>
+			</a>
+			
+        </div>  
+	<div class=" sidebar-nav" collapse-width="isCollapsed">
 	    <h3 class="text-center">Groups</h3> 
 	    <div id='sidebar-buttons' class="text-center">
 	     <div class='btn-group btn-group-sm'>
@@ -18,8 +19,11 @@
 	      
 	            <li>
 	                <div class="nav-link" ng-class="groupSelected(group)">
-	                 <a ng-click="displayLists(group)">[ {{group.display ? '-' : '+'}} ] </a>
-	                 <a class="group-anchor" ng-click="select(group)">{{group.name}}</a>
+	                 <span>
+	                   <a ng-click="displayLists(group)">[ {{group.display ? '-' : '+'}} ] </a>
+                     <a class="group-anchor" ng-click="select(group)">{{group.name}}</a>
+	                 </span>
+	                 
 	                </div>
 	                <ul ng-show="group.display">
 	                    <li ng-repeat="list in group.lists | orderBy:'name'" ng-click="clickList(list,group)">
@@ -30,4 +34,5 @@
 	        
 	    </ul>
 	</div>
+
 </div>
