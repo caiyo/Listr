@@ -63,7 +63,7 @@ public class Application extends Controller {
     	Form<Login> f = Form.form(Login.class).bindFromRequest();
     	if(f.hasErrors()){
     	    System.out.println("username + pass not found");
-    		return badRequest();
+    		return badRequest("Could not find username or password");
     	}
     	else{
     	    System.out.println("username + pass  found");

@@ -6,6 +6,7 @@
 			<div ng-controller="LoginCtrl">
 				<h1 class="text-center">Login!</h1>
 				<form name="loginForm" ng-submit="login(username,password)" method="POST">
+				    
 					<div class='form-group'>
 						<label for='username' class=' control-label' >Username</label>
 						<input id ='Username' class='form-control' type="text" name="Username" placeholder="Username" ng-model="username">
@@ -14,6 +15,13 @@
 						<label for='password' class=' control-label'>Password<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></label>
 						<input id='password' class='form-control' type="password" name="password" placeholder="Password" ng-model="password">
 					</div>
+					<div class="alert alert-danger" role="alert" ng-show="error">
+                            <div>
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                {{error}}
+                            </div>
+                    </div>
 					<div class='form-group'>
 						<input type="submit" value="Login" class="btn btn-primary">
 					</div>	
@@ -24,25 +32,34 @@
 			<div ng-controller="SignupCtrl">
 				<h1 class="text-center">Signup!</h1>
 				<form name="signupForm" ng-submit="signup(username, name, password, confirmPassword)" method="POST">
+				    
 						<div class='form-group'>
-							<label for='username' class=' control-label'>Username</label>
+							<label for='username' class=' control-label'>Username*</label>
 							<input id ='username' class='form-control' type="text" name="username" placeholder="Username" ng-model="username">
 						</div>
 						<div class='form-group'>
-							<label for='name' class=' control-label'>Name</label>
+							<label for='name' class=' control-label'>Name*</label>
 							<input id='name' class='form-control' type='text' name="name" placeholder="Name" ng-model="name">
 						</div>
 						<div class='form-group'>
-							<label for='password' class=' control-label'>Password</label>
+							<label for='password' class=' control-label'>Password*</label>
 							<input id='password' class='form-control' type="password" name="password" placeholder="Password" ng-model="password">
 						</div>
 						<div class='form-group'>
-							<label for='confirmPassword' class=' control-label'>Confirm Password</label>
+							<label for='confirmPassword' class=' control-label'>Confirm Password*</label>
 							<input id='confirmPassword' class='form-control' type="password" name="confirmPassword" placeholder="Confirm Password" ng-model="confirmPassword">
 						</div>
+						<div class="alert alert-danger" role="alert" ng-show="error">
+                            <div ng-repeat="message in error">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Error:</span>
+                                {{message}}
+                            </div>
+                        </div>
 						<div class='form-group'>
 							<input type="submit" value="Sign Up" class="btn btn-primary" >
 						</div>
+						
 				</form>
 			</div>
 		</div>	

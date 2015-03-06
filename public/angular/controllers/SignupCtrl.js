@@ -18,6 +18,8 @@
 								}
 							});
 						else{
+							console.log(data);
+							$scope.error=data;
 							console.log("Error signing up");
 						}
 			});

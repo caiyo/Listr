@@ -9,7 +9,7 @@
 					AuthenticationService.setCredentials(data);
 				}
 				else{
-					alert("error logging in");
+					$scope.error=data;
 				}
 			});
 		};

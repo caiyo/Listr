@@ -75,7 +75,7 @@ public class ListController extends Controller {
                     itemPropVals.add(ipv);
                 }
                 else{
-                    return badRequest("1 or more of the fields cannot be null");
+                    return badRequest("Required fields (*) cannot be empty");
                 }
 
             }
@@ -104,7 +104,7 @@ public class ListController extends Controller {
             ItemList.deleteList(list);
             return ok();
         }
-        return unauthorized("must be creater to delete");
+        return unauthorized("Must be creater to delete");
     }
     
     @Transactional

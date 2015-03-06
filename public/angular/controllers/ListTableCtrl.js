@@ -21,6 +21,7 @@
 					}
 				}
 				else{
+					alert(data);
 					console.log(data);
 				}
 			});

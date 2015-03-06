@@ -14,6 +14,8 @@
 			})
 			.success(function(data, status){
 				callback(data,status);
+			}).error(function(data,status){
+				callback(data,status);
 			});
 		};
 		
@@ -66,7 +68,9 @@
 			})
 			.success(function(data, status){
 				callback(data,status);
-			});
+			}).error(function(data,status){
+				callback(data,status);
+			});	
 		};
 			
 		

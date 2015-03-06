@@ -4,7 +4,6 @@
         </div>
         
         <div class="modal-body">
-            {{error}}
             <form class='form-inline'>
 	            <div class='form-group'>
 	                <label for="username" class="control-label" >Username: </label>
@@ -13,7 +12,13 @@
 	            </div>
             </form>
         </div>
-        
+         <div class="alert alert-danger" role="alert" ng-show="error">
+                <div>
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                    {{error}}
+                </div>
+            </div>  
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>

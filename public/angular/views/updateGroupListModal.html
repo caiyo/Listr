@@ -4,12 +4,17 @@
         </div>
         
         <div class="modal-body">
-            {{error}}
             <div class='form-group'>
                 <label for="name" class="control-label" >Updated {{type}} Name </label>
                 <input id ='name' class='form-control' type="text" name="name" value="{{updatedName}}" placeholder="Update {{type}} name" ng-model="updatedName">
             </div>
-           
+            <div class="alert alert-danger" role="alert" ng-show="error">
+                <div>
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                    {{error}}
+                </div>
+            </div>  
         </div>
         
         <div class="modal-footer">

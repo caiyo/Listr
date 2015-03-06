@@ -42,25 +42,25 @@ public class Account {
 	public List<ValidationError> validate(){
 		 List<ValidationError> errors = new ArrayList<ValidationError>();
 		if(user!=null){
-		    if (user.getUserName().trim().equals("")){
+		    if (user.getUserName() == null || user.getUserName().trim().equals("")){
 	            errors.add(new ValidationError("userNameNull", "Please enter a username"));
 	        }
-	        if(User.findByUserName(user.getUserName().toLowerCase()) !=null){
-	             errors.add(new ValidationError("userNameTaken", "This userName is already taken"));
+		    else if(User.findByUserName(user.getUserName()) !=null){
+	             errors.add(new ValidationError("userNameTaken", "This username is already taken"));
 	        }
 	            
 	        if (user.getName() == null || user.getName().trim().equals("")){
 	            errors.add(new ValidationError("name", "Please enter your name"));
 	        } 
 		}
-		if (!password.equals(confirmPassword)){
-			errors.add(new ValidationError("password", "Password and confirm password must match"));
-			
-		}
 		if (password == null || password.trim().equals("")){
 			errors.add(new ValidationError("password empty", "Password cannot be empty"));
 
 		}
+		else if (!password.equals(confirmPassword)){
+            errors.add(new ValidationError("password", "Password and confirm password must match"));
+            
+        }
 		System.out.println(errors.isEmpty());
 		return errors.isEmpty() ? null : errors;
 	}
@@ -111,13 +111,14 @@ public class Account {
 		account.setPassword(password);
 		account.setSalt(salt);
 		
-		JPA.em().persist(account.getUser());
+		User.createUser(account.getUser());
 		JPA.em().persist(account);
 		return account;
 	}
 	public static Account authenticate(String userName, String password){
 	    System.out.println("authenticating");
-		userName = userName.toLowerCase();
+		if(userName==null)
+		    return null;
 		Account account = Account.findAccountByUserName(userName);
 		if (account != null){
 			String hashPass = Password.hashPasword(password, account.getSalt());
@@ -136,7 +137,7 @@ public class Account {
 	public static Account findAccountByUserName(String userName){
 	    Account queriedAccount;
 	    try{
-	        queriedAccount = JPA.em().createQuery("from Account where user_name=?", Account.class).setParameter(1, userName).getSingleResult();
+	        queriedAccount = JPA.em().createQuery("from Account where user_name=?", Account.class).setParameter(1, userName.toLowerCase()).getSingleResult();
 	    }catch(NoResultException e){
 	        queriedAccount = null;
 	    }

@@ -132,3 +132,7 @@ a{
     -o-transition: width 0.1s ease;
     transition: width 0.1s ease;
 }
+.table>tfoot>tr>td{
+	padding-left: 0px;
+	padding-right: 0px;
+}

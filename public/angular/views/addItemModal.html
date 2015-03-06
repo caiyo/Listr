@@ -4,7 +4,6 @@
         </div>
         
         <div class="modal-body">
-            {{error}}
             <div class='form-group'>
                 <label for="itemName" class="control-label" >Item Name *</label>
                 <input id ='itemName' class='form-control' type="text" name="name" placeholder="Enter Name" ng-model="item.name">
@@ -12,7 +11,14 @@
 			<div class='form-group' ng-repeat="property in list.properties | orderBy:'orderValue'">
 			     <label for="{{property.propertyName}}" class="control-label" >{{property.propertyName}} {{property.required ? "*" : ""}}</label>
 			     <input id="{{property.propertyName}}" class='form-control' type="text" name="{{property.propertyName}}" placeholder="Enter Value" ng-model="item[property.propertyName]">
-			 </div>            
+			 </div>
+			 <div class="alert alert-danger" role="alert" ng-show="error">
+                <div>
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                    {{error}}
+                </div>
+            </div>         
         </div>
         
         <div class="modal-footer">

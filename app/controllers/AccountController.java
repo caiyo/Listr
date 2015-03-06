@@ -2,6 +2,7 @@ package controllers;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -34,10 +35,12 @@ public class AccountController extends Controller {
 		
 		List<ValidationError> error = newAccount.validate();
 		if(error != null){
+		    List<String> errorResponse = new ArrayList<>();
 		    for(ValidationError e :  error){
+		        errorResponse.add(e.message());
                 System.out.println(e.key() + " " +e.message());
             }
-            return badRequest("ERRORS");
+            return badRequest(toJson(errorResponse));
 		}
 		else{
 		    Account account = Account.createAccount(newAccount);

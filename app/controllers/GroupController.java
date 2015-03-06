@@ -34,7 +34,6 @@ public class GroupController extends Controller {
         User currentUser = User.findByUserName(request().username());
         Form<Group> f = Form.form(Group.class).bindFromRequest();
         System.out.println(f);
-        //Group.createGroup(currentUser, f.get());
         return ok(toJson(Group.createGroup(currentUser, f.get())));
     }
     
@@ -45,14 +44,15 @@ public class GroupController extends Controller {
         DynamicForm f = Form.form().bindFromRequest();
         User userToAdd = User.findByUserName(f.get("username"));
         boolean admin = Boolean.parseBoolean(f.get("isAdmin"));
-        if( userToAdd == null){
-            return badRequest("Error adding " + f.get("username") + " to " + group.getName());
+        if(userToAdd == null){
+            return badRequest("username: " + f.get("username") + " doesn't exist");
         }
+        if(userToAdd.isMember(group))
+            return badRequest(userToAdd.getUserName() + " is already a member of this group");
         if(currentUser.addUserToGroup(userToAdd, group, admin))
-          //TODO change what is returned in http response
          return ok(toJson(userToAdd));
         else{
-            return badRequest("Cannot add user to " + group.getName());
+            return unauthorized("Must be an admin to add users to groups");
         }
     }
     
@@ -62,10 +62,11 @@ public class GroupController extends Controller {
         DynamicForm f = Form.form().bindFromRequest();
         User userToPromote = User.findByUserName(f.get("username"));
         Group group = Group.findById(Long.parseLong(groupId));
+        if(userToPromote==currentUser)
+            return badRequest("Cannot promote yourself from admin");
         if(currentUser.promoteToGroupAdmin(userToPromote, group))
-        //TODO change what is returned in http response
            return ok(toJson(userToPromote));
-        return badRequest("Error promoting " + userToPromote.getUserName() + "to admin");
+        return unauthorized("Must be an admin to promote to admin");
     }
     
     @Transactional
@@ -74,9 +75,11 @@ public class GroupController extends Controller {
         DynamicForm f = Form.form().bindFromRequest();
         User userToDemote = User.findByUserName(f.get("username"));
         Group group = Group.findById(Long.parseLong(groupId));
+        if(userToDemote==currentUser)
+            return badRequest("Cannot demote yourself from admin");
         if(currentUser.demoteFromGroupAdmin(userToDemote, group))
             return ok(toJson(userToDemote));
-        return badRequest("Error demoting " + userToDemote.getUserName() + " from admin");
+        return unauthorized("Must be an admin to demote from admin");
     }
     
     @Transactional
@@ -86,10 +89,11 @@ public class GroupController extends Controller {
         DynamicForm f = Form.form().bindFromRequest();
         User userToRemove = User.findByUserName(f.get("username"));
         Group group = Group.findById(Long.parseLong(groupId));
-        //TODO change what is returned in http response
+        if(userToRemove==currentUser)
+            return badRequest("Cannot remove yourself from admin");
         if(currentUser.removeUserFromGroup(userToRemove, group))
             return ok();
-        return badRequest("Error removing " + userToRemove.getUserName() + "from " + group.getName());
+        return unauthorized("Must be an admin to remove users from a group");
     }
     
     @Transactional

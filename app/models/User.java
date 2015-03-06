@@ -30,7 +30,7 @@ public class User {
 
 	public User(){}
 	public User(String userName, String name){
-	    this.userName=userName.toLowerCase();
+	    this.userName=userName;
 	    this.name=name;
 	}
 	//GETTERS SETTERS
