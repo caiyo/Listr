@@ -9,7 +9,7 @@ html {
 }
 body{
 	height:100%;
-    background-color: rgb(218, 218, 218);
+    background-color: rgb(237, 237, 237);
 
 }
 tr{
@@ -38,6 +38,7 @@ tr{
 }
 #main-content{
 	min-height: 200px;
+	padding-left:0px;
 }
 #mainContainer {
     overflow: auto;
@@ -52,19 +53,35 @@ tr{
     height: 100%;
     position: relative;
     width: auto;
-    max-width: 150px;
-    padding-left: 10px;
+    max-width: 160px;
     margin-top: 5px;
     margin-bottom: 5px;
     display:inline-block;
 }
+#sidebar-collapse-btn{
+	float:right;
+    margin-right:-20px;
+    margin-top:50px;
+}
+
+#sidebar-title{
+}
+
 #sidebar-buttons{
 	margin-bottom: 5px;
+}
+.sidebar-nav{
+	padding-left:10px;
+	padding-right: 10px;
 }
 
 .selected-group{
     border-right: 3px solid orange;
     border-left: 3px solid orange;
+}
+.btn-grey{
+	background-color: #EDEDED;
+	border-color: #EDEDED;
 }
 .nav.navbar-nav li a {
     color: white;

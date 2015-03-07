@@ -7,21 +7,22 @@
 				<span class='icon-bar'></span>
 				<span class='icon-bar'></span>
 			</button>
-			<a class='navbar-brand logo' href='#/'>LISTr</a>
+			<a class='navbar-brand logo' href='/#/'>LISTr</a>
 		</div>
 		<div class='navbar-collapse' collapse="isCollapsed">
 			<ul class='nav navbar-nav'>
 				<li>
-					<a href="#/">Home</a>
+					<a href="/#/">Home</a>
 				</li>
 				<li>
-					<a>FAQ</a>
+					<a href="/faq">FAQ</a>
 				</li>
 				<li>
-					<a>Help</a>
+					<a href="/help">Help</a>
 				</li>
 			</ul>
-	  			<ul class='nav navbar-nav navbar-right'>
+	  			<ul class='nav navbar-nav navbar-right' ng-show="user">
+	  			    
 	  				<li>
 	  					<a>
 	  						{{user.name}}
@@ -31,6 +32,14 @@
 	  					<a ng-controller="LogoutCtrl" ng-click="logout()">Logout</a>
 	  				</li>
 				</ul>
+				<ul class='nav navbar-nav navbar-right' ng-show="!user">
+                    
+                    <li>
+                        <a href="/#/">
+                            Login/Signup
+                        </a>
+                    </li>
+                </ul>
 		</div>			
 	</div>
 </div>

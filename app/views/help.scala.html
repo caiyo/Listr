@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="listr">
+
+  <head>
+    <meta name="viewport" content="initial-scale=1">
+    <script  src="https://code.angularjs.org/1.3.13/angular.js"></script>
+    <script src="https://code.angularjs.org/1.3.13/angular-route.js"></script>
+    <script  src="https://code.angularjs.org/1.3.13/angular-cookies.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="@routes.Assets.at("angular/app.js")"></script>
+    
+    <script src="@routes.Assets.at("angular/directives/collapse-width.js")"></script>
+    
+    <script src="@routes.Assets.at("angular/controllers/HeaderCtrl.js")"></script>
+    <script src="@routes.Assets.at("angular/controllers/LogoutCtrl.js")"></script> 
+    <script src="@routes.Assets.at("angular/controllers/MainCtrl.js")"></script>
+
+    
+    <script src="@routes.Assets.at("angular/services/Authentication.js")"></script>
+    <script src="@routes.Assets.at("angular/services/GroupProvider.js")"></script>
+    <script src="@routes.Assets.at("angular/services/ListProvider.js")"></script>   
+    <script src="@routes.Assets.at("angular/services/Listr.js")"></script>
+     <script src="@routes.Assets.at("angular/services/InitialDataLoad.js")"></script> 
+     
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <div class="wrapper">
+        <div id="topBar" ng-include="'/assets/angular/views/_header.html'"></div>
+    </div>
+  </body>
+</html>
