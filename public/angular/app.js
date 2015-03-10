@@ -14,7 +14,14 @@
 			.when("/group/:groupId/list/:listId",{
 				templateUrl: "/assets/angular/views/listView.html",
 				controller: "ListCtrl"
-			}).otherwise("/");
+			})
+			.when("/help", {
+				templateUrl: "/assets/angular/views/help.html"
+			})
+			.when("/faq", {
+				templateUrl: "/assets/angular/views/faq.html"
+			})
+			.otherwise("/");
 
 	});
 }());

@@ -6,8 +6,6 @@ OPTIONS /*all                                       controllers.Application.pref
 
 # Home page
 GET     /                                           controllers.Application.index()
-GET     /faq                                        controllers.Application.faq()
-GET     /help                                       controllers.Application.help()
 
 GET     /signup                                     controllers.Application.signUp()
 

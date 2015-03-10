@@ -43,14 +43,6 @@ public class Application extends Controller {
 	public static Result index() {
         return ok(index2.render());
     }
-	
-	public static Result faq(){
-	    return ok(faq.render());
-	}
-	
-	public static Result help(){
-	    return ok(help.render());
-	}
     
 	public static Result login(){
     	return ok(login.render(Form.form(Login.class)));
