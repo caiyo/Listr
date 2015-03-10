@@ -30,6 +30,106 @@
   <body ng-controller="MainCtrl">
     <div class="wrapper">
         <div id="topBar" ng-include="'/assets/angular/views/_header.html'"></div>
+        <div id="mainContainer">
+            <div id="content">
+                <div id="main-content" class="container">
+                    <div class="raised">
+                        <div class="inner-content">
+                        <h1>Help</h1>
+                            <h4>Creating a group</h4>
+                            <div class="help-content">
+                                <p>
+                                    If you don't see a left side bar, click the menu button to un-collapse it<br>
+                                </p>
+                                <p>
+                                    To create a group, Click the '+' (plus) button on the left side bar<br>
+                                </p>
+                            </div>
+                            <h4>Deleting a group</h4>
+                            <div class="help-content">
+                                <p>
+                                    To delete a group, click group you wish to delete (will have orange bars) <br>
+                                    and click the '-' (minus) button. If you delete a group, all lists in group<br>
+                                    are permanently deleted
+                                </p>
+                                <p>
+                                    Clicking on a group on the left side bar will select it and display group<br>
+                                    information such as lists in the group, members and admins. 
+                                </p>
+                            </div>
+                            
+                            <h4>Creating a List</h4>
+                            <div class="help-content">
+                                <p>
+                                    Lists must be associated to a group, so if you don't have any, create<br>
+                                    one first.<br>
+                                    To create a list, select a group that you want the list to be in.<br>
+                                    Once selected, under the 'Lists' table, click the '+' (plus) button<br>
+                                    and a new screen will pop up. In the new screen, provide the list name <br>
+                                    and add properties you wish the list to have. For example, a grocery list<br>
+                                    might have a 'Quantity' and 'Price' property, and you can also say whether<br>
+                                    or not that property is required when adding items to the list.
+                                </p>
+                            </div>
+                            <h4>Deleting a List</h4>
+                            <div class="help-content">
+                                <p>
+                                    To delete a list, select the group which the list is in. Next, click on the<br>
+                                    list in the 'Lists' table and it will be highlighted gray. After that, click<br>
+                                    the '-' (minus) button and it will be deleted. Only the creator of a list <br>
+                                    can delete it.
+                                </p>  
+                            </div>
+                            <h4>Viewing a list</h4>
+                            <div class="help-content">
+                                <p>
+                                    There are 2 ways to view a list:
+                                    <ol>
+                                        <li>
+                                            Select a group (or click the '[+]' next to the group name) and select the desired list 
+                                        </li>
+                                        <li>
+                                            After selecting a group, double click a list in the 'Lists' table
+                                        </li>
+                                    </ol>
+                                </p>
+                            </div>
+                            <h4>Editing a List</h4>
+                            <div class="help-content">
+                                <p>
+                                    To edit a list (change the name), go to the list's page that you want to edit<br>
+                                    and hover over the lists name. A pencil icon will appear and clicking it will<br>
+                                    bring up a new screen to edit the name.
+                                </p>
+                            </div>
+                            <h4>Adding items to lists</h4>
+                            <div class="help-content">
+                                <p>
+                                    To add an item to the list, click the 'Add Item' button and a screen will pop<br>
+                                    up to create the item. Fields with '*' next to them are required.
+                                </p>
+                            </div>
+                            <h4>Deleting items</h4>
+                            <div class="help-content">
+                                <p>
+                                    To delete an item (or items), select the check box for the items you want to<br>
+                                    delete. Click the down arrow next to the 'Add Item' button and click delete
+                                </p>
+                            </div>
+                            <h4>List / List item actions </h4>
+                            <div class="help-content">
+                                <p>
+                                    You can make an item (or items) as checked off (for example when a item is completed)<br>
+                                    To do so, check the boxes next to the items you want to check off an select the <br>
+                                    'check off/uncheck' action from the drop down. If an item is checked off, it wont<br>
+                                    show in the table unless you have the 'Display Checked off' button clicked.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
     </div>
   </body>
 </html>
