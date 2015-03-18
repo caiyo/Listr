@@ -67,6 +67,12 @@ tr{
     margin-bottom: 5px;
     display:inline-block;
 }
+.sidebar-nav.navbar-collapse.collapse.in {
+    min-width: 150px;
+}
+ .sidebar-nav.navbar-collapse.collapsing-width{
+    min-width: 150px;
+}
 #sidebar-collapse-btn{
 	float:right;
     margin-right:-20px;
