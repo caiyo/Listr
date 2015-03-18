@@ -41,6 +41,14 @@ tr{
 	min-height: 200px;
 	padding-left:0px;
 }
+@media (min-width: 768px){
+.sidebar-nav.navbar-collapse.collapse{
+	width: auto;
+} 
+}
+#main-content .navbar-toggle{
+	float:left;
+}
 #mainContainer {
     overflow: auto;
     height: 100%;
@@ -83,6 +91,7 @@ tr{
 .btn-grey{
 	background-color: #EDEDED;
 	border-color: #EDEDED;
+	margin-top: 0px;
 }
 .nav.navbar-nav li a {
     color: white;

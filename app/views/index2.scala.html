@@ -30,6 +30,8 @@
 	<script src="@routes.Assets.at("angular/services/Authentication.js")"></script>
 	<script src="@routes.Assets.at("angular/services/GroupProvider.js")"></script>
     <script src="@routes.Assets.at("angular/services/ListProvider.js")"></script>	
+    <script src="@routes.Assets.at("angular/services/SidebarProvider.js")"></script>	
+
 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
     
@@ -42,7 +44,12 @@
   		<div id="mainContainer"     >
   		    <div id="sidebar-wrapper" ng-include="'/assets/angular/views/_sidebar.html'"></div>
   		    <div id="content">
-  		        <div id="main-content" class="container-fluid" ng-view></div>
+  		        <div id="main-content" class="container-fluid" >
+	  		        <a  class='btn btn-grey navbar-toggle collapsed' ng-click="switchCollapsed(!isCollapsed.collapsed)" >
+				    	<span class='glyphicon glyphicon glyphicon-list'  aria-hidden="true"></span>
+					</a>
+					<div ng-view></div>
+				</div>
   		     </div>
   		</div>
   		

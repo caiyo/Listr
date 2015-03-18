@@ -43,7 +43,7 @@ angular.module("listr").directive('collapseWidth', ['$transition', function ($tr
           if (initialAnimSkip) {
             initialAnimSkip = false;
             collapseDone();
-            element.css({width: 0});
+            element.css({width: 'auto'});
           } else {
             // CSS transitions don't work with height: auto, so we have to manually change the height to a specific value
             element.css({ width: element[0].scrollWidth + 'px' });
@@ -59,6 +59,7 @@ angular.module("listr").directive('collapseWidth', ['$transition', function ($tr
         function collapseDone() {
           element.removeClass('collapsing-width');
           element.addClass('collapse');
+          //element.css({width: 'auto'});
         }
 
         scope.$watch(attrs.collapseWidth, function (shouldCollapse) {

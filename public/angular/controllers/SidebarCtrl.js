@@ -1,9 +1,10 @@
 (function(){
 	var module = angular.module("listr");
 
-	var SidebarCtrl = function($scope, ListrService, $location, GroupProvider, ListProvider){
+	var SidebarCtrl = function($scope, ListrService, $location, GroupProvider, ListProvider, SidebarProvider){
 		
-		$scope.isCollapsed = false;
+		$scope.isCollapsed = SidebarProvider.isCollapsed();
+	
 		
 		$scope.groups=GroupProvider.getGroups();
 		
