@@ -7,7 +7,6 @@
 			return obj;
 		}
 		provider.setCollapsed = function(collapse){
-			console.log("collapsed? " + collapse);
 			obj.collapsed=collapse;
 		}
 		

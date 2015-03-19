@@ -32,10 +32,10 @@ public class Account {
 	private User user;
 	
 	public Account(){}
-	public Account(String password, String confirmPassword, String username, String name){
+	public Account(String password, String confirmPassword, String username, String name, String email){
 	    this.password=password;
 	    this.confirmPassword = confirmPassword;
-	    user = new User(username, name);
+	    user = new User(username, name, email);
 	}
 	
 	//Validates that new account has correct/necessary data
@@ -51,7 +51,14 @@ public class Account {
 	            
 	        if (user.getName() == null || user.getName().trim().equals("")){
 	            errors.add(new ValidationError("name", "Please enter your name"));
-	        } 
+	        }
+	        
+	        if(user.getEmail() == null || user.getEmail().trim().equals("")){
+	        	errors.add(new ValidationError("email", "Please enter an email address"));
+	        }
+	        else if(User.findByEmail(user.getEmail())!=null){
+	        	errors.add(new ValidationError("emailTaken", "This email is already taken"));
+	        }
 		}
 		if (password == null || password.trim().equals("")){
 			errors.add(new ValidationError("password empty", "Password cannot be empty"));

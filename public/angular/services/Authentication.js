@@ -55,12 +55,13 @@
 				
 			return $rootScope.user;
 		};
-		service.signup = function(username, name, password, confirmPassword, callback){
+		service.signup = function(username, name, email, password, confirmPassword, callback){
 			$http({
 				method: "POST",
 				url: "/api/signup",
 				data : {
 					userName:username,
+					email: email,
 					password: password,
 					confirmPassword: confirmPassword,
 					name: name

@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NoResultException;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,6 +22,7 @@ public class User {
     @Id
 	private String userName;
 	private String name;
+	private String email;
 	@ManyToMany (mappedBy="members")
 	@JsonIgnore
 	private Set<Group> groups = new HashSet<>();
@@ -29,9 +31,10 @@ public class User {
 	private Set<Group> adminedGroups = new HashSet<>();
 
 	public User(){}
-	public User(String userName, String name){
+	public User(String userName, String name, String email){
 	    this.userName=userName;
 	    this.name=name;
+	    this.email=email;
 	}
 	//GETTERS SETTERS
 	public String getName() {
@@ -47,6 +50,13 @@ public class User {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public String getEmail(){
+		return email;
+	}
+	public void setEmail(String email){
+		this.email=email;
 	}
 	public Set<Group> getGroups(){
 		return groups;
@@ -141,6 +151,16 @@ public class User {
 	public static User findByUserName(String userName){
 		userName = userName.toLowerCase();
 		return JPA.em().find(User.class, userName);
+	}
+	
+	public static User findByEmail(String email){
+	    User queriedAccount;
+	    try{
+	        queriedAccount = JPA.em().createQuery("from User where email=?", User.class).setParameter(1, email.toLowerCase()).getSingleResult();
+	    }catch(NoResultException e){
+	        queriedAccount = null;
+	    }
+	    return queriedAccount;
 	}
 }
     

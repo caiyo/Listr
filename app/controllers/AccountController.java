@@ -30,7 +30,7 @@ public class AccountController extends Controller {
 	public static Result createAccount(){
 		//Form<Account> f = Form.form(Account.class).bindFromRequest();
 		DynamicForm df = Form.form().bindFromRequest();
-		Account newAccount = new Account(df.get("password"), df.get("confirmPassword"),df.get("userName"), df.get("name"));
+		Account newAccount = new Account(df.get("password"), df.get("confirmPassword"),df.get("userName"), df.get("name"), df.get("email"));
 		System.out.println(df.toString());
 		
 		List<ValidationError> error = newAccount.validate();
