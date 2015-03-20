@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 
 import play.data.validation.ValidationError;
 import play.db.jpa.JPA;
-import Utils.Password;
+import Utils.PasswordService;
 
 @Entity
 @Table(name="Listr_Account")
@@ -111,10 +111,10 @@ public class Account {
 	 * Static Methods
 	 */
 	public static Account createAccount(Account account){
-		String salt = Password.getSalt();
+		String salt = PasswordService.getSalt();
 		String password;
 		
-		password = Password.hashPasword(account.getPassword(), salt);
+		password = PasswordService.hashPasword(account.getPassword(), salt);
 		account.setPassword(password);
 		account.setSalt(salt);
 		
@@ -128,7 +128,7 @@ public class Account {
 		    return null;
 		Account account = Account.findAccountByUserName(userName);
 		if (account != null){
-			String hashPass = Password.hashPasword(password, account.getSalt());
+			String hashPass = PasswordService.hashPasword(password, account.getSalt());
 			Account queriedAccount;
 			try{
 			    queriedAccount = JPA.em().createQuery("from Account where user_name=? and password=?", Account.class).setParameter(1, userName).setParameter(2, hashPass).getSingleResult();

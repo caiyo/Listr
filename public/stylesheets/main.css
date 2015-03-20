@@ -122,12 +122,15 @@ tr{
 .navbar-default .navbar-toggle .icon-bar{
 	background-color: white;
 }
-a{
+.group-anchor{
 	color:black;
 }
  a:hover{
 	text-decoration: none;
 	cursor: pointer;
+}
+.inline{
+    display: inline;
 }
 #group-tables{
 	padding-top: 20px;

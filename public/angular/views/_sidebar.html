@@ -10,27 +10,27 @@
 	<div class=" sidebar-nav navbar-collapse" collapse-width="isCollapsed.collapsed">
 	    <h3 id="sidebar-title" class="text-center">Groups</h3> 
 	    <div id='sidebar-buttons' class="text-center">
-	     <div class='btn-group btn-group-sm'>
-	         <a id='addGroup' title="create group" class='btn btn-primary btn-sm' ng-controller="ModalCtrl" ng-click="open('createGroup')"><span class='glyphicon glyphicon-plus'  aria-hidden="true"></span></a>
-	         <a id='deleteGroup' title="delete group" class='btn btn-primary btn-sm' ng-click="removeGroup(selected.group)"><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
-	     </div>
+    	    <div class='btn-group btn-group-sm'>
+    	       <a id='addGroup' title="create group" class='btn btn-primary btn-sm' ng-controller="ModalCtrl" ng-click="open('createGroup')"><span class='glyphicon glyphicon-plus'  aria-hidden="true"></span></a>
+    	       <a id='deleteGroup' title="delete group" class='btn btn-primary btn-sm' ng-click="removeGroup(selected.group)"><span class='glyphicon glyphicon-minus'  aria-hidden="true"></span></a>
+    	    </div>
 	    </div>
 	    <ul class="group-list nav nav-stacked" ng-repeat="group in groups | orderBy:'name'">
 	      
-	            <li>
-	                <div class="nav-link" ng-class="groupSelected(group)">
-	                 <span>
-	                   <a ng-click="displayLists(group)">[ {{group.display ? '-' : '+'}} ] </a>
-                     <a class="group-anchor" ng-click="select(group)">{{group.name}}</a>
-	                 </span>
-	                 
-	                </div>
-	                <ul ng-show="group.display">
-	                    <li ng-repeat="list in group.lists | orderBy:'name'" ng-click="clickList(list,group)">
-	                        <a>{{list.name}}</a>
-	                    </li>
-	                </ul>
-	            </li>
+            <li>
+                <div class="nav-link" ng-class="groupSelected(group)">
+                     <div>
+                         <a class="group-anchor" ng-click="displayLists(group)">[ {{group.display ? '-' : '+'}} ] </a>
+                         <div class="inline"><a class="group-anchor" ng-click="select(group)">{{group.name}}</a></div>
+                     </div>
+                     
+                    </div>
+                <ul ng-show="group.display">
+                    <li ng-repeat="list in group.lists | orderBy:'name'" ng-click="clickList(list,group)">
+                    <a>{{list.name}}</a>
+                    </li>
+                </ul>
+            </li>
 	        
 	    </ul>
 	</div>

@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class Password {
+public class PasswordService {
 	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
 	private static final Random random = new SecureRandom();
 	
