@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import Utils.EmailService;
 import models.Account;
 import models.User;
 import play.data.DynamicForm;
@@ -15,6 +16,7 @@ import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.*;
 import static play.libs.Json.toJson;
 
 public class AccountController extends Controller {
@@ -48,7 +50,18 @@ public class AccountController extends Controller {
 		}
 	}
 
-	
+	@Transactional
+	public static Result actionRouter(){
+	    String action = request().getQueryString("action");
+	    switch(action) {
+	        case "resetPassword":
+	            return ok(resetPasswordRequest.render(null));
+	        case "getUsername":
+	            return ok(usernameRequest.render(null));
+	        default:
+	            return badRequest();
+	    }
+	}
 
 	/*
 	 * Read
@@ -59,12 +72,28 @@ public class AccountController extends Controller {
 		User user = User.findByUserName(request().username());
 		return ok(toJson(user));
 	}
-
-	/*
-	 * Update
-	 */
-	
-	/*
-	 * Delete
-	 */
+    
+    @Transactional
+    public static Result resetPassword(){
+        DynamicForm df = Form.form().bindFromRequest();
+        User u = User.findByUserName(df.get("username"));
+        if(u!=null){
+            EmailService.resetPassword(u);
+            return redirect(routes.Application.index());    
+        }
+        else
+            return badRequest(resetPasswordRequest.render("Username doesn't exist"));
+    }
+    @Transactional
+    public static Result getUsername(){
+        DynamicForm df = Form.form().bindFromRequest();
+        User u = User.findByEmail(df.get("email"));
+        if(u!=null){
+            EmailService.sendUsername(u);
+            return redirect(routes.Application.index());    
+        }
+        else
+            return badRequest(usernameRequest.render("Username doesn't exist"));
+    }
+    
 }

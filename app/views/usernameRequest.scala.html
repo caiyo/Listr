@@ -1,0 +1,40 @@
+@(error: String = null)
+<html>
+<head>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    
+</head>
+<body>
+    <div id="resetPasswordRequest" class="container raised">
+        <div class="inner-content">
+        @helper.form(routes.AccountController.getUsername()){
+            @if(error !=null){
+                <div class="alert alert-danger" role="alert">
+                    <div >
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        @error
+                    </div>
+                </div>
+            }
+        
+            <form>
+                <div class='form-group '>
+                    <label for='email' class='control-label'>Email*</label>
+                    <input id='email' class='form-control' type="text" name="email" placeholder="Email">
+                </div>
+                
+                
+                <div class='form-group'>
+                    <input type="submit" value="Submit" class="btn btn-primary" >
+                    <a href="@routes.Application.index()" class="btn btn-primary" >Cancel</a>
+                    
+                </div>
+            </form>
+            }
+        
+        </div>
+    </div>
+</body>
+</html>

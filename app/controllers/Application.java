@@ -54,7 +54,7 @@ public class Application extends Controller {
     }
     
     public static Result signUp(){
-		return ok();
+		return ok(signup.render(Form.form(Account.class)));
 	}
     
     //TODO figure out how to handle request

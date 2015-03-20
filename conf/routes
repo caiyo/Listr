@@ -11,6 +11,7 @@ GET     /signup                                     controllers.Application.sign
 
 GET	    /login                                      controllers.Application.login()
 
+GET     /account                                    controllers.AccountController.actionRouter()
 #########API##############
 
 #Account api
@@ -18,9 +19,11 @@ GET	    /login                                      controllers.Application.logi
 POST    /api/login                                  controllers.Application.authenticate()
 POST    /api/logout                                 controllers.Application.logout()
 POST    /api/signup                                 controllers.AccountController.createAccount()
-
+POST    /api/account/resetpassword                  controllers.AccountController.resetPassword()
+POST    /api/account/getusername                    controllers.AccountController.getUsername()
 #User api
 GET     /api/user                                   controllers.AccountController.getAccountUser()
+
 
 #Group api
 GET     /api/groups                                 controllers.GroupController.getGroups()

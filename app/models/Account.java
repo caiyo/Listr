@@ -30,6 +30,7 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name="user_name")
 	private User user;
+	private String resetPasswordToken;
 	
 	public Account(){}
 	public Account(String password, String confirmPassword, String username, String name, String email){
@@ -104,6 +105,12 @@ public class Account {
 	}
 	public void setUser(User user) {
 	    
+	}
+	public String getResetPasswordToken(){
+	    return resetPasswordToken;
+	}
+	public void setResetPasswordToken(String resetPasswordToken){
+	    this.resetPasswordToken=resetPasswordToken;
 	}
 
 
