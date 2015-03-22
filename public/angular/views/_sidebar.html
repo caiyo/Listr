@@ -27,7 +27,7 @@
                     </div>
                 <ul ng-show="group.display">
                     <li ng-repeat="list in group.lists | orderBy:'name'" ng-click="clickList(list,group)">
-                    <a>{{list.name}}</a>
+                    <a class="list-anchor">{{list.name}}</a>
                     </li>
                 </ul>
             </li>

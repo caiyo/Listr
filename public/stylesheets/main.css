@@ -122,7 +122,7 @@ tr{
 .navbar-default .navbar-toggle .icon-bar{
 	background-color: white;
 }
-.group-anchor{
+.group-anchor .list-anchor{
 	color:black;
 }
  a:hover{
