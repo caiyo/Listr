@@ -21,6 +21,26 @@ import static play.libs.Json.toJson;
 
 public class AccountController extends Controller {
 
+    @Transactional
+    public static Result actionRouter(String action){
+        switch(action) {
+            case "requestResetPassword":
+                return ok(resetPasswordRequest.render(null));
+            case "getUsername":
+                return ok(usernameRequest.render(null));
+            default:
+                return redirect(routes.Application.index());
+        }
+    }
+    @Transactional
+    public static Result resetPasswordForm(String id, String token){
+        Account a = Account.findAccountById(Long.parseLong(id));
+        if(a.getResetPasswordToken()!=null && a.getResetPasswordToken().equals(token))
+            return ok(resetPasswordForm.render(a,null));
+        else
+            return redirect(routes.Application.index());
+    }
+
 /*************************
  *********API*************
  *************************/	
@@ -50,18 +70,7 @@ public class AccountController extends Controller {
 		}
 	}
 
-	@Transactional
-	public static Result actionRouter(){
-	    String action = request().getQueryString("action");
-	    switch(action) {
-	        case "resetPassword":
-	            return ok(resetPasswordRequest.render(null));
-	        case "getUsername":
-	            return ok(usernameRequest.render(null));
-	        default:
-	            return badRequest();
-	    }
-	}
+	
 
 	/*
 	 * Read
@@ -73,8 +82,10 @@ public class AccountController extends Controller {
 		return ok(toJson(user));
 	}
     
+    //sends out email with url to reset password
+    //possibly make asynch
     @Transactional
-    public static Result resetPassword(){
+    public static Result resetPasswordRequest(){
         DynamicForm df = Form.form().bindFromRequest();
         User u = User.findByUserName(df.get("username"));
         if(u!=null){
@@ -84,6 +95,23 @@ public class AccountController extends Controller {
         else
             return badRequest(resetPasswordRequest.render("Username doesn't exist"));
     }
+    
+    //resets password and clears out email token so it can't be used again
+    @Transactional
+    public static Result resetPassword(String id){
+        DynamicForm df = Form.form().bindFromRequest();
+        String password = df.get("password");
+        String confirmPassword = df.get("confirmPassword");
+        Account a = Account.findAccountById(Long.parseLong(id));
+        if(password.equals(confirmPassword)){
+            a.setResetPasswordToken(null);
+            a.setPassword(password);
+            return redirect(routes.Application.index());
+        }
+        return badRequest(resetPasswordForm.render(a,"Password and confirm password must match"));
+    }
+    
+    //emails username to entered email address
     @Transactional
     public static Result getUsername(){
         DynamicForm df = Form.form().bindFromRequest();
@@ -93,7 +121,7 @@ public class AccountController extends Controller {
             return redirect(routes.Application.index());    
         }
         else
-            return badRequest(usernameRequest.render("Username doesn't exist"));
+            return badRequest(usernameRequest.render("No account exists with the email address entered"));
     }
     
 }

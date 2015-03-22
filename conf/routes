@@ -11,7 +11,9 @@ GET     /signup                                     controllers.Application.sign
 
 GET	    /login                                      controllers.Application.login()
 
-GET     /account                                    controllers.AccountController.actionRouter()
+GET     /account                                    controllers.AccountController.actionRouter(action)
+
+GET     /account/:id                                controllers.AccountController.resetPasswordForm(id:String, token)
 #########API##############
 
 #Account api
@@ -19,7 +21,8 @@ GET     /account                                    controllers.AccountControlle
 POST    /api/login                                  controllers.Application.authenticate()
 POST    /api/logout                                 controllers.Application.logout()
 POST    /api/signup                                 controllers.AccountController.createAccount()
-POST    /api/account/resetpassword                  controllers.AccountController.resetPassword()
+POST    /api/account/:id/passwordReset              controllers.AccountController.resetPassword(id:String)
+POST    /api/account/resetpasswordrequest           controllers.AccountController.resetPasswordRequest()
 POST    /api/account/getusername                    controllers.AccountController.getUsername()
 #User api
 GET     /api/user                                   controllers.AccountController.getAccountUser()

@@ -86,7 +86,7 @@ public class Account {
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = PasswordService.hashPasword(password, getSalt());
 	}
 	public String getConfirmPassword() {
 		return confirmPassword;
@@ -113,17 +113,14 @@ public class Account {
 	    this.resetPasswordToken=resetPasswordToken;
 	}
 
-
 	/*
 	 * Static Methods
 	 */
 	public static Account createAccount(Account account){
 		String salt = PasswordService.getSalt();
-		String password;
-		
-		password = PasswordService.hashPasword(account.getPassword(), salt);
-		account.setPassword(password);
+	    
 		account.setSalt(salt);
+		account.setPassword(account.getPassword());
 		
 		User.createUser(account.getUser());
 		JPA.em().persist(account);
@@ -156,5 +153,10 @@ public class Account {
 	        queriedAccount = null;
 	    }
 	    return queriedAccount;
+	}
+	
+	public static Account findAccountById(long id){
+	       return JPA.em().find(Account.class, id);
+
 	}
 }

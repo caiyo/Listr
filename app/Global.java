@@ -3,6 +3,8 @@ import play.libs.F.Promise;
 import play.mvc.Action;
 import play.mvc.Http;
 import play.mvc.SimpleResult;
+import play.mvc.Http.RequestHeader;
+import views.html.defaultpages.badRequest;
 
 public class Global extends GlobalSettings {
     private class ActionWrapper extends Action.Simple {
@@ -24,4 +26,5 @@ public class Global extends GlobalSettings {
     public Action<?> onRequest(Http.Request request, java.lang.reflect.Method actionMethod) {
         return new ActionWrapper(super.onRequest(request, actionMethod));
     }
+    
 }

@@ -6,11 +6,18 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
+import models.Account;
 import models.User;
 
 public class EmailService {
     public static void resetPassword(User user){
-        
+        //use getSalt method to generate random token for password rest
+        String resetPasswordToken = PasswordService.getSalt();
+        Account a= Account.findAccountByUserName(user.getUserName());
+        a.setResetPasswordToken(resetPasswordToken);
+        prepEmail(user, "Listr app password reset",
+                "To reset your password, go to the following link:\n"
+                + "http://localhost:9000/account/"+a.getId()+"?token="+a.getResetPasswordToken());
     }
     
     public static void sendUsername(User user){
