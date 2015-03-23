@@ -10,14 +10,14 @@ import models.Account;
 import models.User;
 
 public class EmailService {
-    public static void resetPassword(User user){
+    public static void resetPassword(User user, String baseURL){
         //use getSalt method to generate random token for password rest
         String resetPasswordToken = PasswordService.getSalt();
         Account a= Account.findAccountByUserName(user.getUserName());
         a.setResetPasswordToken(resetPasswordToken);
         prepEmail(user, "Listr app password reset",
                 "To reset your password, go to the following link:\n"
-                + "http://localhost:9000/account/"+a.getId()+"?token="+a.getResetPasswordToken());
+                + baseURL+"account/"+a.getId()+"?token="+a.getResetPasswordToken());
     }
     
     public static void sendUsername(User user){

@@ -89,7 +89,8 @@ public class AccountController extends Controller {
         DynamicForm df = Form.form().bindFromRequest();
         User u = User.findByUserName(df.get("username"));
         if(u!=null){
-            EmailService.resetPassword(u);
+            String baseURL = routes.Application.index().absoluteURL(request());
+            EmailService.resetPassword(u,baseURL);
             return redirect(routes.Application.index());    
         }
         else
