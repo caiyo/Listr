@@ -11,6 +11,7 @@ import models.User;
 
 public class EmailService {
     public static void resetPassword(User user, String baseURL){
+        System.out.println("Resetting password for: " + user.getUserName());
         //use getSalt method to generate random token for password rest
         String resetPasswordToken = PasswordService.getSalt();
         Account a= Account.findAccountByUserName(user.getUserName());
@@ -21,6 +22,7 @@ public class EmailService {
     }
     
     public static void sendUsername(User user){
+        System.out.println("Sending username to: " + user.getEmail());
         prepEmail(user, "Listr app username request", 
                 "You have requested your username\nyour username is: " + user.getUserName());
     }
@@ -36,12 +38,10 @@ public class EmailService {
         
         email.setHostName(smtpHost);
         if ( smtpPort != null && smtpPort > 1 && smtpPort < 65536 ) {
-            System.out.println("setting port");
             email.setSmtpPort(smtpPort);
         }
         
         if (smtpUser!="" && smtpUser!=null ) {
-            System.out.println(smtpUser + " " + smtpPassword);
             email.setAuthentication(smtpUser, smtpPassword);
         }
         
