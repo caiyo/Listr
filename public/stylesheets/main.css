@@ -180,10 +180,14 @@ tr{
 	margin-left: 10px;
 }
 .group-list li .nav-link>div,
-.group-list li .nav-link>div {
+.group-list li ul li{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.group-list li ul{
+    list-style-position: inside;
 }
 
 
