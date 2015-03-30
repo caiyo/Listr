@@ -179,5 +179,11 @@ tr{
 .help-content{
 	margin-left: 10px;
 }
+.group-list li .nav-link>div,
+.group-list li .nav-link>div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 

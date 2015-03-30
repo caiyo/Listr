@@ -82,7 +82,7 @@
 		}
 		
 		$scope.isCheckedOff= function(item){
-			return item.done ? "item-checkedoff" : null
+			return item.done ? "danger" : null
 		};
 		
 		$scope.checkbox = {};

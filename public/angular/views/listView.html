@@ -33,7 +33,7 @@
 		                </tr>
 		            </thead>
 		            <tbody>
-		                <tr ng-repeat="item in list.items | orderBy:'name'" ng-class="isCheckedOff(item)" ng-show="(!item.done || (displayCheckedoff && item.done))">
+		                <tr ng-repeat="item in list.items | orderBy:'id'" ng-class="isCheckedOff(item)" ng-show="(!item.done || (displayCheckedoff && item.done))">
 		                    <td><input id='completedCheckbox' name='completed' class="checkbox" type='checkbox' ng-checked="selectedItems[item.id]" ng-click="addRemoveItemSelected(item)"></td>
 		                    <td>{{item.name}}</td>
 		                    <td ng-repeat="property in item.properties | orderBy:'listProperty.orderValue'">{{property.value}}</td>
