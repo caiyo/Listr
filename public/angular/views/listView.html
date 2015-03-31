@@ -24,24 +24,26 @@
 	    </div>
 	    <div class="row">
 		    <div class="col-sm-6">
-		        <table class='table table-bordered'>
-		            <thead>
-		                <tr>
-		                    <th class="col-md-1"></th>     
-		                    <th>Name</th>
-		                    <th ng-repeat="property in list.properties | orderBy:'orderValue'">{{property.propertyName}}</th>
-		                </tr>
-		            </thead>
-		            <tbody>
-		                <tr ng-repeat="item in list.items | orderBy:'id'" ng-class="isCheckedOff(item)" ng-show="(!item.done || (displayCheckedoff && item.done))">
-		                    <td><input id='completedCheckbox' name='completed' class="checkbox" type='checkbox' ng-checked="selectedItems[item.id]" ng-click="addRemoveItemSelected(item)"></td>
-		                    <td>{{item.name}}</td>
-		                    <td ng-repeat="property in item.properties | orderBy:'listProperty.orderValue'">{{property.value}}</td>
-		                </tr>
-		            </tbody>
-		            <tfoot>
-		            </tfoot>
-		        </table>
+                <div class="table-responsive">
+    		        <table class='table table-bordered'>
+    		            <thead>
+    		                <tr>
+    		                    <th class="col-md-1"></th>     
+    		                    <th>Name</th>
+    		                    <th ng-repeat="property in list.properties | orderBy:'orderValue'">{{property.propertyName}}</th>
+    		                </tr>
+    		            </thead>
+    		            <tbody>
+    		                <tr ng-repeat="item in list.items | orderBy:'id'" ng-class="isCheckedOff(item)" ng-show="(!item.done || (displayCheckedoff && item.done))">
+    		                    <td><input id='completedCheckbox' name='completed' class="checkbox" type='checkbox' ng-checked="selectedItems[item.id]" ng-click="addRemoveItemSelected(item)"></td>
+    		                    <td>{{item.name}}</td>
+    		                    <td ng-repeat="property in item.properties | orderBy:'listProperty.orderValue'">{{property.value}}</td>
+    		                </tr>
+    		            </tbody>
+    		            <tfoot>
+    		            </tfoot>
+    		        </table>
+                </div>
 		    </div>
 	    </div>
     </div>
